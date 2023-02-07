@@ -122,7 +122,9 @@ RYAN YEE \\
 
 
 \textbf{Instructions:} 
-Use this latex file as a template to develop your homework. Submit your homework on time as a single pdf file to Canvas. Please wrap your code and upload to a public GitHub repo, then attach the link below the instructions so that we can access it. You can choose any programming language (i.e. python, R, or MATLAB), as long as you implement the algorithm from scratch (e.g. do not use sklearn on questions 1 to 7 in section 2). Please check Piazza for updates about the homework.
+Use this latex file as a template to develop your homework. Submit your homework on time as a single pdf file to Canvas. Please wrap your code and upload to a public GitHub repo, then attach the link below the instructions so that we can access it. You can choose any programming language (i.e. python, R, or MATLAB), as long as you implement the algorithm from scratch (e.g. do not use sklearn on questions 1 to 7 in section 2). Please check Piazza for updates about the homework.\\
+
+Code used for this assignment can be found at \url{https://github.com/ryanyee3/CS760_Machine_Learning/tree/master/homework2}.
 
 \section{A Simplified Decision Tree}
 You are to implement a decision-tree learner for classification.
@@ -155,6 +157,13 @@ Your program should implement a decision tree learner according to the following
 \section{Questions}
 \begin{enumerate}
 \item (Our algorithm stops at pure labels) [10 pts] If a node is not empty but contains training items with the same label, why is it guaranteed to become a leaf?  Explain. You may assume that the feature values of these items are not all the same. \\
+
+\begin{soln}
+  If a node is not empty but contains items with only labels, it is guaranteed to be a leaf because the information gain from any split will be zero.
+  Indeed, suppose all the labels in the node are 1.
+  Then for this node, $H(Y \vert X) = P(X = 1)H(Y \vert X=1) + P(X = 0)H(Y \vert X=0) = H(Y \vert X=1) = H(Y)$.
+  Thus, $H(Y) - H(Y \vert X) = 0$ which is a stopping condition.
+\end{soln}
 
 \item (Our algorithm is greedy)  [10 pts] Handcraft a small training set where both classes are present but the algorithm refuses to split; instead it makes the root a leaf and stop;
 Importantly, if we were to manually force a split, the algorithm will happily continue splitting the data set further and produce a deeper tree with zero training error.

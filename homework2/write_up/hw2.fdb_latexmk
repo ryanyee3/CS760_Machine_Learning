@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1675369854 "/Users/rtyee/Documents/uw_madison/cs760/homework2/hw2.tex" "hw2.pdf" "hw2" 1675369854
-  "/Users/rtyee/Documents/uw_madison/cs760/homework2/hw2.tex" 1675369853 10908 00539a4091f536bc6c0b495997a8c0e9 ""
+["pdflatex"] 1675808914 "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" "hw2.pdf" "hw2" 1675808915
+  "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" 1675808914 11441 7ce8137ad07c1365363166c4fcc60819 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -138,9 +138,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1664768776 2826442 2543a726ee2c98e6ae4cf7175e290f71 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "hw2.aux" 1675369854 1175 1061a20d0ca8fb1669a1080c16ab366e "pdflatex"
-  "hw2.out" 1675369854 606 caba0bdd28b2eaa16be05ef7e41ffe73 "pdflatex"
-  "hw2.tex" 1675369853 10908 00539a4091f536bc6c0b495997a8c0e9 ""
+  "hw2.aux" 1675808915 1175 1061a20d0ca8fb1669a1080c16ab366e "pdflatex"
+  "hw2.out" 1675808915 606 caba0bdd28b2eaa16be05ef7e41ffe73 "pdflatex"
+  "hw2.tex" 1675808914 11441 7ce8137ad07c1365363166c4fcc60819 ""
   (generated)
   "hw2.aux"
   "hw2.log"
