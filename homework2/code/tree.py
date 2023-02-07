@@ -24,24 +24,26 @@ def get_info_entropy_gain(data, j, c):
     returns the entropy gain from splitting on variable j at point c
     '''
     hy = get_info_entropy(data)
-    if j == 1:
-        hy_less = get_info_entropy(data[data.x1 < c])
-        p_less = len(data[data.x1 < c]) / len(data)
-        hy_gtet = get_info_entropy(data[data.x1 >= c])
-        p_gtet = len(data[data.x1 >= c]) / len(data)
-    else:
-        hy_less = get_info_entropy(data[data.x2 < c])
-        p_less = len(data[data.x2 < c]) / len(data)
-        hy_gtet = get_info_entropy(data[data.x2 >= c])
-        p_gtet = len(data[data.x2 >= c]) / len(data)
+    hy_less = get_info_entropy(data[data.iloc[:, j] < c])
+    p_less = len(data[data.iloc[:, j] < c]) / len(data)
+    hy_gtet = get_info_entropy(data[data.iloc[:, j] >= c])
+    p_gtet = len(data[data.iloc[:, j] >= c]) / len(data)
     hy_x = p_less * hy_less + p_gtet * hy_gtet
     return hy - hy_x
 
-def get_candidate_splints(data):
-    pass
+def get_candidate_splits(data):
+    '''
+    returns 2D array of candidate splits c and corresponding variable index j
+    '''
+    C = []
+    for i in range(len(data.x1)):
+        C.append([data.x1[i], 0])
+    for i in range(len(data.x2)):
+        C.append([data.x2[i], 1])
+    return C
 
 def find_best_split(data, candidates_splits):
     pass
 
 if __name__=="__main__":
-    print(get_info_entropy_gain(d1, 1, .8))
+    print(len(get_candidate_splits(d1)))
