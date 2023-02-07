@@ -5,6 +5,11 @@ import math
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 
 def make_subtree(data):
+    C = get_candidate_splits(data)
+    if len(data) == 0:
+        pass # make leaf
+    elif len(C) == 0:
+        pass # make leaf
     pass
 
 def get_info_entropy(data):
@@ -29,28 +34,26 @@ def get_info_entropy_gain(data, c, j):
     hy_x = p_less * hy_less + p_gtet * hy_gtet
     return hy - hy_x
 
+def get_one_var_splits(data, j):
+    '''
+    returns splits for variable j
+    '''
+    C = []
+    for i in range(len(data.iloc[:, j])):
+        try:
+            entropy_gain = get_info_entropy_gain(data, data.iloc[:, j][i], j)
+        except:
+            pass
+        else:
+            if entropy_gain > 0:
+                C.append([data.iloc[:, j][i], j])
+    return C
+
 def get_candidate_splits(data):
     '''
     returns 2D array of candidate splits c and corresponding variable index j
     '''
-    C = []
-    for i in range(len(data.x1)):
-        try:
-            entropy_gain = get_info_entropy_gain(data, data.x1[i], 0)
-        except:
-            pass
-        else:
-            if entropy_gain > 0:
-                C.append([data.x1[i], 0])
-    for i in range(len(data.x2)):
-        try:
-           entropy_gain = get_info_entropy_gain(data, data.x2[i], 1)
-        except:
-            pass
-        else:
-            if entropy_gain > 0:
-                C.append([data.x2[i], 1])
-    return C
+    return get_one_var_splits(data, 0) + get_one_var_splits(data, 1)
 
 def find_best_split(data, candidates_splits):
     max_gain = 0
