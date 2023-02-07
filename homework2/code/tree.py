@@ -35,9 +35,21 @@ def get_candidate_splits(data):
     '''
     C = []
     for i in range(len(data.x1)):
-        C.append([data.x1[i], 0])
+        try:
+            entropy_gain = get_info_entropy_gain(data, data.x1[i], 0)
+        except:
+            pass
+        else:
+            if entropy_gain > 0:
+                C.append([data.x1[i], 0])
     for i in range(len(data.x2)):
-        C.append([data.x2[i], 1])
+        try:
+           entropy_gain = get_info_entropy_gain(data, data.x2[i], 1)
+        except:
+            pass
+        else:
+            if entropy_gain > 0:
+                C.append([data.x2[i], 1])
     return C
 
 def find_best_split(data, candidates_splits):
@@ -55,4 +67,4 @@ def find_best_split(data, candidates_splits):
     return candidates_splits[max_index]
 
 if __name__=="__main__":
-    pass
+    print(len(get_candidate_splits(d1)))
