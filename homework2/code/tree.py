@@ -1,9 +1,7 @@
 import numpy as np
 import pandas as pd
 import math
-import os, sys
 
-# d1 = open("homework2/data/D1.txt", "r").read()
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 
 def make_subtree(data):
@@ -19,9 +17,9 @@ def get_info_entropy(data):
     p0 = n0 / (n1 + n0)
     return -p0 * math.log2(p0) - p1 * math.log2(p1)
 
-def get_info_entropy_gain(data, j, c):
+def get_info_entropy_gain(data, c, j):
     '''
-    returns the entropy gain from splitting on variable j at point c
+    returns the entropy gain from splitting at cut-point c on variable j
     '''
     hy = get_info_entropy(data)
     hy_less = get_info_entropy(data[data.iloc[:, j] < c])
@@ -43,7 +41,18 @@ def get_candidate_splits(data):
     return C
 
 def find_best_split(data, candidates_splits):
-    pass
+    max_gain = 0
+    max_index = None
+    for i in range(len(candidates_splits)):
+        try:
+            cur_gain = get_info_entropy_gain(data, candidates_splits[i][0], candidates_splits[i][1])
+        except:
+            pass
+        else:
+            if cur_gain > max_gain:
+                max_gain = cur_gain
+                max_index = i
+    return candidates_splits[max_index]
 
 if __name__=="__main__":
-    print(len(get_candidate_splits(d1)))
+    pass
