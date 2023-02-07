@@ -1,8 +1,8 @@
-import numpy as np
 import pandas as pd
 import math
 
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
+d2 = pd.read_csv("homework2/data/D2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 
 def make_subtree(data):
     C = get_candidate_splits(data)
@@ -117,4 +117,4 @@ def find_best_split(data, candidates_splits):
 
 
 if __name__=="__main__":
-    print(make_subtree(d1))
+    print(make_subtree(d2))
