@@ -1,8 +1,11 @@
 import pandas as pd
 import math
 
+q2 = pd.read_csv("homework2/data/Q2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
+druns = pd.read_csv("homework2/data/Druns.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 d2 = pd.read_csv("homework2/data/D2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
+
 
 def make_subtree(data):
     C = get_candidate_splits(data)
@@ -32,6 +35,7 @@ def make_leaf(data):
     else:
         node_val = 0
     return {"type": "leaf", "node_val": node_val}
+
 
 def get_info_entropy(data):
     '''
@@ -116,5 +120,6 @@ def find_best_split(data, candidates_splits):
     return candidates_splits[max_index]
 
 
-if __name__=="__main__":
-    print(make_subtree(d2))
+if __name__ == "__main__":
+    # print(make_subtree(q2))
+    print(get_candidate_splits(druns))
