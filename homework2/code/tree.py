@@ -3,6 +3,7 @@ import math
 
 q2 = pd.read_csv("homework2/data/Q2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 druns = pd.read_csv("homework2/data/Druns.txt", sep=" ", header=None, names=["x1", "x2", "y"])
+d3 = pd.read_csv("homework2/data/D3leaves.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 d2 = pd.read_csv("homework2/data/D2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 
@@ -93,7 +94,7 @@ def get_one_var_splits(data, j):
         except:
             pass
         else:
-            if (entropy_gain > 0.0) & (gain_ratio > 0.0):
+            if (entropy_gain > 0.0) & (gain_ratio > 0.0) & ([data.iloc[:, j][i], j] not in C):
                 C.append([data.iloc[:, j][i], j])
     return C
 
@@ -103,6 +104,17 @@ def get_candidate_splits(data):
     returns 2D array of candidate splits c and corresponding variable index j
     '''
     return get_one_var_splits(data, 0) + get_one_var_splits(data, 1)
+
+
+def get_all_splits(data, j):
+    '''
+    returns all candidate splits
+    '''
+    C = []
+    for i in range(len(data.iloc[:, j])):
+        if [data.iloc[:, j][i], j] not in C:
+            C.append([data.iloc[:, j][i], j])
+    return C
 
 
 def find_best_split(data, candidates_splits):
@@ -121,5 +133,22 @@ def find_best_split(data, candidates_splits):
 
 
 if __name__ == "__main__":
-    # print(make_subtree(q2))
-    print(get_candidate_splits(druns))
+    # print(make_subtree(q2)))
+
+    # c = get_all_splits(druns, 0) + get_all_splits(druns, 1)
+    # for i in c:
+    #     if (i[1] == 0):
+    #         var = "x1"
+    #     else:
+    #         var = "x2"
+    #     if (get_gain_ratio(druns, i[0], i[1]) > 0): 
+    #         print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & \\\\")
+    #     else:
+    #         print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & ", round(get_info_entropy_gain(druns, i[0], i[1]), 4)," \\\\")
+    
+    # print(make_subtree(d3))
+
+    # print(make_subtree(d1))
+
+    print(make_subtree(d2))
+
