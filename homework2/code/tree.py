@@ -132,6 +132,17 @@ def find_best_split(data, candidates_splits):
     return candidates_splits[max_index]
 
 
+def predict(tree, x1, x2):
+    if tree['type'] == 'leaf':
+        return tree['node_val']
+    else:
+        cut_var = [x1, x2][tree['cut_var']]
+        if cut_var >= tree['cut_val']:
+            return predict(tree['right_child'], x1, x2)
+        else:
+            return predict(tree['left_child'], x1, x2)
+
+
 if __name__ == "__main__":
     # print(make_subtree(q2)))
 
@@ -150,5 +161,7 @@ if __name__ == "__main__":
 
     # print(make_subtree(d1))
 
-    print(make_subtree(d2))
+    # print(make_subtree(d2))
+    
+    pass
 
