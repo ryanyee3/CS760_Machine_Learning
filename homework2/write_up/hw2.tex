@@ -169,9 +169,57 @@ Your program should implement a decision tree learner according to the following
 Importantly, if we were to manually force a split, the algorithm will happily continue splitting the data set further and produce a deeper tree with zero training error.
 You should (1) plot your training set, (2) explain why.  Hint: you don't need more than a handful of items. \\
 
+\begin{soln}
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../plots/q2_plot.png}
+    \caption{Plot of training set.}
+    \label{fig:q2_plot}
+  \end{figure}
+  Figure \ref{fig:q2_plot} is a plot of the hypothetical training set.
+  The algorithm refuses to split this training set because the information gain from all the available splits is zero.
+  The reason for this is that the data is symmetric, and thus $Y$ is independent of $X$ for any available split.
+  However, if were were to force a split at an arbitrary split point, the algorthim with continue splitting the data further since any given split would result in exactly two observations of each outcome in the corresponding child nodes.
+  Then, these child nodes would split the remaining values into leaf nodes with exactly one observation in each node.
+\end{soln}
+
 \item (Information gain ratio exercise)  [10 pts] Use the training set Druns.txt.  For the root node, list all candidate cuts and their information gain ratio. If the entropy of the candidate split is zero, please list its mutual information (i.e. information gain). Hint: to get $\log_2(x)$ when your programming language may be using a different base, use \verb|log(x)/log(2)|. Also, please follow the split rule in the first section. \\
 
+\begin{soln}
+  \begin{center}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    Cutpoint & Variable & Info Gain Ratio & Info Gain \\
+    \hline
+    0.1  &  x1  &  0.1005  & \\
+    0.0  &  x1  &  0  &  0  \\
+    -2  &  x2  &  0  &  0  \\
+    -1  &  x2  &  0.1005  & \\
+    0  &  x2  &  0.056  & \\
+    1  &  x2  &  0.0058  & \\
+    2  &  x2  &  0.0011  & \\
+    3  &  x2  &  0.0164  & \\
+    4  &  x2  &  0.0497  & \\
+    5  &  x2  &  0.1112  & \\
+    6  &  x2  &  0.2361  & \\
+    7  &  x2  &  0.056  & \\
+    8  &  x2  &  0.4302  & \\
+    \hline
+  \end{tabular}
+  \end{center}
+\end{soln}
+
 \item (The king of interpretability)  [10 pts] Decision tree is not the most accurate classifier in general.  However, it persists.  This is largely due to its rumored interpretability: a data scientist can easily explain a tree to a non-data scientist.  Build a tree from D3leaves.txt.  Then manually convert your tree to a set of logic rules.  Show the tree\footnote{When we say show the tree, we mean either the standard computer science tree view, or some crude plaintext representation of the tree -- as long as you explain the format.  When we say visualize the tree, we mean a plot in the 2D $\x$ space that shows how the tree will classify any points.} and the rules. \\
+
+\begin{soln}
+  Here is my tree: $\{'type': 'node', 'cut\_val': 10, 'cut\_var': 0, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 1\}\}$.
+  I used a python dictionary to represent my tree.
+  The 'type' says if it is a leaf or internal node.
+  Internal nodes have 'cut\_vals' and "cut\_vars' which denote c and j of the splitting rule respectively.
+  Internal nodes also have a 'right' and 'left' child which represent nodes with data greater than or equal to c and less than c respectively.
+
+  This tree has one node and two leaves. If $x_1 >= 10$ we predict $y = 1$, otherwise, we predict $y = 1$.
+\end{soln}
 
 \item (Or is it?)  [20 pts] For this question only, make sure you DO NOT VISUALIZE the data sets or plot your tree's decision boundary in the 2D $\x$ space.  If your code does that, turn it off before proceeding.  This is because you want to see your own reaction when trying to interpret a tree.  You will get points no matter what your interpretation is.
 And we will ask you to visualize them in the next question anyway.
@@ -179,11 +227,28 @@ And we will ask you to visualize them in the next question anyway.
   
   \item Build a decision tree on D1.txt.  Show it to us in any format (e.g. could be a standard binary tree with nodes and arrows, and denote the rule at each leaf node; or as simple as plaintext output where each line represents a node with appropriate line number pointers to child nodes; whatever is convenient for you). Again, do not visualize the data set or the tree in the $\x$ input space.  In real tasks you will not be able to visualize the whole high dimensional input space anyway, so we don't want you to ``cheat'' here. 
   
-  \item Look at your tree in the above format (remember, you should not visualize the 2D dataset or your tree's decision boundary) and try to interpret the decision boundary in human understandable English. 
+  \begin{soln}
+    $\{'type': 'node', 'cut\_val': 0.201829, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}$
+  \end{soln}
+
+  \item Look at your tree in the above format (remember, you should not visualize the 2D dataset or your tree's decision boundary) and try to interpret the decision boundary in human understandable English.
+  
+  \begin{soln}
+    This tree has one node and two leaves. If $x_2 >= 0.201829$ we predict $y = 1$, otherwise we predict $y = 0$.
+  \end{soln}
   
   \item Build a decision tree on D2.txt.  Show it to us. 
+
+  \begin{soln}
+    $\{'type': 'node', 'cut\_val': 0.533076, 'cut\_var': 0, 'right\_child': \{'type': 'node', 'cut\_val': 0.383738, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.551028, 'cut\_var': 0, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 1\}\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.769272, 'cut\_var': 0, 'right\_child': \{'type': 'node', 'cut\_val': 0.168115, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.221062, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 1\}\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.301105, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.220354, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 0\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}\}\}\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.618201, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.329959, 'cut\_var': 0, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.903804, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.956006, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 1\}\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.099204, 'cut\_var': 0, 'right\_child': \{'type': 'node', 'cut\_val': 0.745406, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.837743, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'leaf', 'node\_val': 1\}\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}\}\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.502066, 'cut\_var': 1, 'right\_child': \{'type': 'node', 'cut\_val': 0.446889, 'cut\_var': 0, 'right\_child': \{'type': 'leaf', 'node\_val': 1\}, 'left\_child': \{'type': 'node', 'cut\_val': 0.347109, 'cut\_var': 0, 'right\_child': \{'type': 'node', 'cut\_val': 0.56674, 'cut\_var': 1, 'right\_child': \{'type': 'leaf', 'node\_val': 0\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}\}, 'left\_child': \{'type': 'leaf', 'node\_val': 0\}\}\}\}$
+  \end{soln}
   
   \item Try to interpret your D2 decision tree. Is it easy or possible to do so without visualization? \\
+  
+  \begin{soln}
+    The D2 decision tree is very hard to interpret.
+    It has 17 nodes so even if I wrote down all the decision rules it would not be very comprehensible.
+  \end{soln}
   
   \end{itemize}
 
