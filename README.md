@@ -8,5 +8,5 @@ Content review/skills assessment on linear algebra, calculus, probability/statis
 
 ## Homework 2
 
-Implementing decision trees.
+Decision Trees.
 
