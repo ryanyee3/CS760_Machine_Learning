@@ -7,7 +7,6 @@ d3 = pd.read_csv("homework2/data/D3leaves.txt", sep=" ", header=None, names=["x1
 d1 = pd.read_csv("homework2/data/D1.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 d2 = pd.read_csv("homework2/data/D2.txt", sep=" ", header=None, names=["x1", "x2", "y"])
 
-
 def make_subtree(data):
     C = get_candidate_splits(data)
     if len(data) == 0:
