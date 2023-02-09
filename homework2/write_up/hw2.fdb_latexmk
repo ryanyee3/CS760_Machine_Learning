@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1675985914 "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" "hw2.pdf" "hw2" 1675985915
+["pdflatex"] 1675986197 "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" "hw2.pdf" "hw2" 1675986198
   "../plots/d1_tree_viz.png" 1675963274 121961 281dd46eec270cc19302d278aefcedb9 ""
   "../plots/d2_tree_viz.png" 1675963279 140367 9c116658fe8dd1000e54a985f0b3701f ""
   "../plots/dbig_128.png" 1675985825 36755 56f7cda4876208ab4fed3e6b1f013f92 ""
@@ -9,7 +9,8 @@
   "../plots/dbig_8192.png" 1675985913 61639 4143d674671df21d5ceccc21fd502030 ""
   "../plots/error_curve.png" 1675985913 19915 c094f2e361b5947dee601a2859e6e40c ""
   "../plots/q2_plot.png" 1675890526 13551 e730a04f996b645a93a66573c07ce049 ""
-  "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" 1675983300 19032 1db704152e69b0d747561e56f2ed6b46 ""
+  "../plots/sklearn_error_curve.png" 1675985914 17866 66d97219fd64ce1ab1adc354bd275e05 ""
+  "/Users/rtyee/Documents/uw_madison/cs760/homework2/write_up/hw2.tex" 1675986195 19564 95be46c96cf44fbc3e360db10980b674 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -147,9 +148,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1664768776 2826442 2543a726ee2c98e6ae4cf7175e290f71 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "hw2.aux" 1675985915 3607 643a6cb961421152d12f2c00b7a1fcba "pdflatex"
-  "hw2.out" 1675985915 606 caba0bdd28b2eaa16be05ef7e41ffe73 "pdflatex"
-  "hw2.tex" 1675983300 19032 1db704152e69b0d747561e56f2ed6b46 ""
+  "hw2.aux" 1675986198 3837 ef0044881e98b3a36c2f68c7075c86b3 "pdflatex"
+  "hw2.out" 1675986198 606 caba0bdd28b2eaa16be05ef7e41ffe73 "pdflatex"
+  "hw2.tex" 1675986195 19564 95be46c96cf44fbc3e360db10980b674 ""
   (generated)
   "hw2.aux"
   "hw2.log"

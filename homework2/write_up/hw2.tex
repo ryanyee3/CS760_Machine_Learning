@@ -301,11 +301,11 @@ Then discuss why the size of your decision trees on D1 and D2 differ.  Relate th
       \hline
       $n$ & Tree Nodes & $err_n$ \\
       \hline
-      32  &  0  &  0.3982  \\
-      128  &  0  &  0.3982  \\
-      512  &  6  &  0.2312  \\
-      2048  &  6  &  0.1892  \\
-      8192  &  13  &  0.1869  \\
+      32  &  0  &  0.3944  \\
+      128  &  2  &  0.3944  \\
+      512  &  7  &  0.2334  \\
+      2048  &  6  &  0.172  \\
+      8192  &  13  &  0.1781  \\
       \hline
     \end{tabular}
     \end{center}
@@ -356,6 +356,29 @@ Then discuss why the size of your decision trees on D1 and D2 differ.  Relate th
 \section{sklearn [10 pts]}
 Learn to use sklearn (\url{https://scikit-learn.org/stable/}).
 Use sklearn.tree.DecisionTreeClassifier to produce trees for datasets $D_{32}, D_{128}, D_{512}, D_{2048}, D_{8192}$.  Show two things in your answer: (1) List $n$, number of nodes in that tree, $err_n$. (2) Plot $n$ vs. $err_n$.
+
+\begin{soln}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $n$ & Tree Nodes & $err_n$ \\
+      \hline
+      32  &  9  &  0.1383  \\
+      128  &  23  &  0.073  \\
+      512  &  41  &  0.0586  \\
+      2048  &  111  &  0.0243  \\
+      8192  &  243  &  0.0149  \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../plots/sklearn_error_curve.png}
+    \caption{Learning curve}
+    \label{fig:sklearn_error_curve} 
+  \end{figure}
+\end{soln}
 
 \section{Lagrange Interpolation [10 pts]}
 Fix some interval $[a, b]$ and sample $n = 100$ points $x$ from this interval uniformly. Use these to build a training set consisting of $n$ pairs $(x, y)$ by setting function $y = sin(x)$. \\
