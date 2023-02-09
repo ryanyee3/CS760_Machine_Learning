@@ -262,6 +262,27 @@ And we will ask you to visualize them in the next question anyway.
   \end{itemize}
 Then discuss why the size of your decision trees on D1 and D2 differ.  Relate this to the hypothesis space of our decision tree algorithm. \\
 
+\begin{soln}
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../plots/d1_tree_viz.png}
+    \caption{Scatter of D1.txt data with visualizations of decision tree boundaries.}
+    \label{fig:d1_tree_viz}
+  \end{figure}
+
+  \begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../plots/d2_tree_viz.png}
+    \caption{Scatter of D2.txt data with visualizations of decision tree boundaries.}
+    \label{fig:d2_tree_viz}
+  \end{figure}
+
+  The size of the decision trees produced by the D1.txt and D2.txt data differ because of the hypothesis space of our decision tree algorithm.
+  Our algorithm only considers splits on one dimension, which limits the hypothesis space of our algorithm.
+  From figure \ref{fig:d2_tree_viz}, we can clearly see that the data is split on the line $x2 + x1 = 1$.
+  If we were to have decision boundaries that considered linear combinations of features, I would anticipate the size of the trees would be the same.
+\end{soln}
+
 \item (Learning curve)  [20 pts] We provide a data set Dbig.txt with 10000 labeled items.  Caution: Dbig.txt is sorted.
   \begin{itemize}
   
@@ -273,6 +294,64 @@ Then discuss why the size of your decision trees on D1 and D2 differ.  Relate th
   \end{itemize}
   
 \end{enumerate}
+
+\begin{soln}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $n$ & Tree Nodes & $err_n$ \\
+      \hline
+      32  &  0  &  0.3982  \\
+      128  &  0  &  0.3982  \\
+      512  &  6  &  0.2312  \\
+      2048  &  6  &  0.1892  \\
+      8192  &  13  &  0.1869  \\
+      \hline
+    \end{tabular}
+    \end{center}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/error_curve.png}
+      \caption{Learning curve}
+      \label{fig:error_curve} 
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/dbig_32.png}
+      \caption{Tree visualization for $n = 32$}
+      \label{fig:dbig_32}
+    \end{figure}
+    
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/dbig_128.png}
+      \caption{Tree visualization for $n = 128$}
+      \label{fig:dbig_128}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/dbig_512.png}
+      \caption{Tree visualization for $n = 512$}
+      \label{fig:dbig_512}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/dbig_2048.png}
+      \caption{Tree visualization for $n = 2048$}
+      \label{fig:dbig_2048}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{../plots/dbig_8192.png}
+      \caption{Tree visualization for $n = 8192$}
+      \label{fig:dbig_8192}
+    \end{figure}
+  \end{soln} 
 
 \section{sklearn [10 pts]}
 Learn to use sklearn (\url{https://scikit-learn.org/stable/}).
