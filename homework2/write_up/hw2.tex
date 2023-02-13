@@ -388,5 +388,21 @@ Build a model $f$ by using Lagrange interpolation, check more details in \url{ht
 Generate a test set using the same distribution as your test set. Compute and report the resulting model’s train and test error. What do you observe?
 Repeat the experiment with zero-mean Gaussian noise $\epsilon$ added to $x$. Vary the standard deviation for $\epsilon$ and report your findings.
 
+\begin{soln}
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $n$ & Train Error & Test Error \\
+      \hline
+      10  &  4.3835e-22  &  6.9074e-07  \\
+      20  &  1.4873e-07  &  8.7370e-07  \\
+      50  &  3.0097e+30  &  6.3737e+29  \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{soln}
+
+
+
 \bibliographystyle{apalike}
 \end{document}
