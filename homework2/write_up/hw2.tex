@@ -389,6 +389,9 @@ Generate a test set using the same distribution as your test set. Compute and re
 Repeat the experiment with zero-mean Gaussian noise $\epsilon$ added to $x$. Vary the standard deviation for $\epsilon$ and report your findings.
 
 \begin{soln}
+
+  For all experiments I samples from the interval $[-3, 3]$ and use MSE as my measure of error.
+
   \begin{center}
     \begin{tabular}{|c|c|c|}
       \hline
@@ -400,6 +403,35 @@ Repeat the experiment with zero-mean Gaussian noise $\epsilon$ added to $x$. Var
       \hline
     \end{tabular}
   \end{center}
+
+  The table above shows the results from the first experiment I ran using Lagrange interpolation.
+  The documentation from scipy.org says that the algorithm is not stable for $n > 20$ so I tried the experiment with several different $n$.
+  We find that when $n=10$, the error on the training data is several orders of magnitude smaller than the error on the testing data.
+  When $n=20$, the training error is still smaller than the testing error but by a significantly smaller margin.
+  Finally, when $n=50$, the training error is actually bigger than the test error.
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      $n$ & $\sigma$ & Train Error & Test Error \\
+      \hline
+      15  &  .5 & 1782.7832  &  23238.8291  \\
+      15  &  1 & 10025899609.8926  &  1879476606.1438 \\
+      15  &  2 & 111.9039  &  340.1059  \\
+      15  &  5 & 12447544.4681  &  12549414.3277  \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  The table above shows the results for the second experiment I ran using Lagrange interpolation.
+  In this experiment, I trained the Lagrange polynomial with some noise $\epsilon$ added to the $x$-values, where $\epsilon \sim \mathbf{N}(0, \sigma)$.
+  I fixed the $n=15$ for all trials to isolate the effect of $\sigma$ on the error.
+  The results on interesting, at first as $\sigma$ increases from .5 to 1 the error for both training and testing data increases.
+  But, from 1 to 2 the error decreases for both the training and testing data.
+  When sigma changes from 2 to 5, $\sigma$ increases again.
+  In every trial, the train error was less than the testing error.
+  What I gather from these results is that there is some level of random noise you can add to the model to prevent overfitting the data.
+  However, choosing $\sigma$ could be difficult.
 \end{soln}
 
 
