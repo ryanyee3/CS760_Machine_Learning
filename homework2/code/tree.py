@@ -143,24 +143,24 @@ def predict(tree, x1, x2):
 
 
 if __name__ == "__main__":
-    # print(make_subtree(q2)))
+    print(make_subtree(q2))
 
-    # c = get_all_splits(druns, 0) + get_all_splits(druns, 1)
-    # for i in c:
-    #     if (i[1] == 0):
-    #         var = "x1"
-    #     else:
-    #         var = "x2"
-    #     if (get_gain_ratio(druns, i[0], i[1]) > 0): 
-    #         print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & \\\\")
-    #     else:
-    #         print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & ", round(get_info_entropy_gain(druns, i[0], i[1]), 4)," \\\\")
+    c = get_all_splits(druns, 0) + get_all_splits(druns, 1)
+    for i in c:
+        if (i[1] == 0):
+            var = "x1"
+        else:
+            var = "x2"
+        if (get_gain_ratio(druns, i[0], i[1]) > 0): 
+            print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & \\\\")
+        else:
+            print(i[0], " & ", var, " & ", round(get_gain_ratio(druns, i[0], i[1]), 4), " & ", round(get_info_entropy_gain(druns, i[0], i[1]), 4)," \\\\")
     
-    # print(make_subtree(d3))
+    print(make_subtree(d3))
 
-    # print(make_subtree(d1))
+    print(make_subtree(d1))
 
-    # print(make_subtree(d2))
-    
+    print(make_subtree(d2))
+
     pass
 

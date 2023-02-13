@@ -13,10 +13,11 @@ def lagrange_experiment(a, b, n, sigma):
     print(n, " & ", train_error, " & ", test_error, " \\\\")
 
 if __name__=="__main__":
+    print("Experiment 1\n")
     lagrange_experiment(-3, 3, 10, 0)
     lagrange_experiment(-3, 3, 20, 0)
     lagrange_experiment(-3, 3, 50, 0)
-    print("/n")
+    print("Experiment 2\n")
     lagrange_experiment(-3, 3, 15, .5)
     lagrange_experiment(-3, 3, 15, 1)
     lagrange_experiment(-3, 3, 15, 2)

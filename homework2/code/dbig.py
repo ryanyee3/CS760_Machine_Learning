@@ -37,33 +37,6 @@ def get_sklearn_error(model, test):
             n_err += 1
     return n_err / len(test)
 
-# tree32 = t.make_subtree(train.iloc[0:32, :])
-# tree128 = t.make_subtree(train.iloc[0:128, :])
-# tree512 = t.make_subtree(train.iloc[0:512, :])
-# tree2048 = t.make_subtree(train.iloc[0:2048, :])
-# tree8192 = t.make_subtree(train)
-
-
-# error = [
-#         get_error(tree32, test), 
-#         get_error(tree128, test), 
-#         get_error(tree512, test), 
-#         get_error(tree2048, test), 
-#         get_error(tree8192, test)
-#         ]
-# error_data = pd.DataFrame(data = {
-#     "n": n, 
-#     "error": error})  
-# error_curve = ggplot(error_data, aes(x="n", y="error")) + geom_point() + geom_line() + scale_x_log10() + labs(title="Learning Curve")
-
-# sktree32 = DecisionTreeClassifier().fit(train.iloc[0:32, 0:2], train.iloc[0:32, 2])
-# sktree128 = DecisionTreeClassifier().fit(train.iloc[0:128, 0:2], train.iloc[0:128, 2])
-# sktree512 = DecisionTreeClassifier().fit(train.iloc[0:512, 0:2], train.iloc[0:512, 2])
-# sktree2048 = DecisionTreeClassifier().fit(train.iloc[0:2048, 0:2], train.iloc[0:2048, 2])
-# sktree8192 = DecisionTreeClassifier().fit(train.iloc[0:2048, 0:2], train.iloc[0:2048, 2])
-
-
-
 if __name__ == "__main__":
     n = [32, 128, 512, 2048, 8192]
 

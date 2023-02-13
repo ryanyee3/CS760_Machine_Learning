@@ -31,9 +31,9 @@ def draw_lines(sub_tree, x1_range, x2_range):
             draw_lines(sub_tree['left_child'], x1_range, [x2_range[0], c])
 
 if __name__ == "__main__":
-    # ggsave(filename="homework2/plots/q2_plot.png", plot=q2_plot)
-    # ggsave(filename="homework2/plots/d1_plot.png", plot=d1_plot)
-    # ggsave(filename="homework2/plots/d2_plot.png", plot=d2_plot)
+    ggsave(filename="homework2/plots/q2_plot.png", plot=q2_plot)
+    ggsave(filename="homework2/plots/d1_plot.png", plot=d1_plot)
+    ggsave(filename="homework2/plots/d2_plot.png", plot=d2_plot)
     visualize_tree(d1, [0, 1], [0, 1])
     plt.savefig("homework2/plots/d1_tree_viz.png")
     plt.clf()
