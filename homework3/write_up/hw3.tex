@@ -308,11 +308,20 @@ Confidence positive & Correct class \\ \hline
 \begin{enumerate}
 	\item (6pts) Draw a ROC curve based on the above table.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{../figs/q5_roc_curve.png}
+		\end{figure}
+	\end{soln}
 	
 	\item (3pts) (Real-world open question) Suppose you want to choose a threshold parameter so that mails with confidence positives above the threshold can be classified as spam. Which value will you choose? Justify your answer based on the ROC curve.
 	
-	\begin{soln}  Solution goes here. \end{soln}
+	\begin{soln}
+		Based on the thresholds used by the ROC curve, I would want to choose either .8, .45, or .2 as my threshold value.
+		I am personally paranoid that I am going to miss an email and would rather have more spam come into my inbox as opposed to missing a potentially important email, so I would chose .8 as the threshold for myself.
+		With .8 as my threshold, my false positive rate would be very low while still filtering our some spam emails.
+	\end{soln}
 \end{enumerate}
 
 \item (8 pts) In this problem, we will walk through a single step of the gradient descent algorithm for logistic regression. As a reminder,
@@ -348,13 +357,13 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	The expected figure looks like this.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=5cm]{figs/implementation1_expected_result.png}
+		\includegraphics[width=5cm]{../figs/implementation1_expected_result.png}
 	\end{figure}
 	
 	\paragraph{Spam filter} Now, we will use 'emails.csv' as our dataset. The description is as follows.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=\linewidth]{figs/email_head.png}
+		\includegraphics[width=\linewidth]{../figs/email_head.png}
 	\end{figure}
 	
 	\begin{itemize}
@@ -385,7 +394,7 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	Expected figure looks like this.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=8cm]{figs/knn.png}
+		\includegraphics[width=8cm]{../figs/knn.png}
 	\end{figure}
 	
 	\begin{soln}  Solution goes here. \end{soln}
@@ -394,7 +403,7 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	Expected figure looks like this.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=8cm]{figs/roc.png}
+		\includegraphics[width=8cm]{../figs/roc.png}
 	\end{figure}
 	Note that the logistic regression results may differ.
 	
