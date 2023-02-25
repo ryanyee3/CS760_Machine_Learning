@@ -10,3 +10,7 @@ Content review/skills assessment on linear algebra, calculus, probability/statis
 
 Decision Trees, Model Evaluation.
 
+## Homework 3
+
+kNN, implementing logistic regression, ROC curves, evaluation metrics.
+
