@@ -67,44 +67,44 @@ def cv_log_reg(fold, X, y, step_size, max_it=100, stop_delta=10**-4):
 
 
 if __name__ == '__main__':
-    for i in range(1, 6):
-        knn_cv(1, i)
+    # for i in range(1, 6):
+    #     knn_cv(1, i)
 
-    for i in range(1, 6):
-        cv_log_reg(i, X, y, .0001, max_it=1000)
+    # for i in range(1, 6):
+    #     cv_log_reg(i, X, y, .003, max_it=1000)
 
-    k = [1, 3, 5, 7, 10]
-    folds = [1, 2, 3, 4, 5]
-    avg_acc = []
-    for i in k:
-        a = [knn_cv(i, x) for x in folds]
-        print(i, "&", round(sum(a) / 5, 4), "\\\\")
-        avg_acc.append(sum(a) / 5)
+    # k = [1, 3, 5, 7, 10]
+    # folds = [1, 2, 3, 4, 5]
+    # avg_acc = []
+    # for i in k:
+    #     a = [knn_cv(i, x) for x in folds]
+    #     print(i, "&", round(sum(a) / 5, 4), "\\\\")
+    #     avg_acc.append(sum(a) / 5)
     
-    plt.plot(k, avg_acc)
-    plt.scatter(k, avg_acc)
-    plt.title("kNN 5-Fold CV")
-    plt.xlabel("k")
-    plt.ylabel("Average Accuracy")
-    plt.savefig("homework3/figs/kNN_CV")
+    # plt.plot(k, avg_acc)
+    # plt.scatter(k, avg_acc)
+    # plt.title("kNN 5-Fold CV")
+    # plt.xlabel("k")
+    # plt.ylabel("Average Accuracy")
+    # plt.savefig("homework3/figs/kNN_CV")
 
-    X_train = X.iloc[0:4000, ]
-    y_train = y.iloc[0:4000, ]
-    X_test = X.iloc[4000:5000, ]
-    y_test = y.iloc[4000:5000, ]
-    knn5= knn(n_neighbors=5)
-    knn5.fit(X_train, y_train)
-    knn_probs = knn5.predict_proba(X_test)
-    knn_pred = [i[1] for i in knn_probs]
-    fpr_knn, tpr_knn, thresh_knn = roc_curve(y_test, knn_pred)
-    log_reg_coef = log_reg(X_train, y_train, .0001, max_it=1000)
-    log_reg_pred = sigma(X_test.dot(log_reg_coef))
-    fpr_log_reg, tpr_log_reg, thresh_log_reg = roc_curve(y_test, log_reg_pred)
-    plt.plot(fpr_knn, tpr_knn)
-    plt.plot(fpr_log_reg, tpr_log_reg)
-    plt.xlabel("False Positive Rate")
-    plt.ylabel("True Positive Rate")
-    plt.savefig("homework3/figs/spam_roc.png")
+    # X_train = X.iloc[0:4000, ]
+    # y_train = y.iloc[0:4000, ]
+    # X_test = X.iloc[4000:5000, ]
+    # y_test = y.iloc[4000:5000, ]
+    # knn5= knn(n_neighbors=5)
+    # knn5.fit(X_train, y_train)
+    # knn_probs = knn5.predict_proba(X_test)
+    # knn_pred = [i[1] for i in knn_probs]
+    # fpr_knn, tpr_knn, thresh_knn = roc_curve(y_test, knn_pred)
+    # log_reg_coef = log_reg(X_train, y_train, .003, max_it=1000)
+    # log_reg_pred = sigma(X_test.dot(log_reg_coef))
+    # fpr_log_reg, tpr_log_reg, thresh_log_reg = roc_curve(y_test, log_reg_pred)
+    # plt.plot(fpr_knn, tpr_knn)
+    # plt.plot(fpr_log_reg, tpr_log_reg)
+    # plt.xlabel("False Positive Rate")
+    # plt.ylabel("True Positive Rate")
+    # plt.savefig("homework3/figs/spam_roc2.png")
     
     pass
 

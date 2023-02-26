@@ -263,7 +263,7 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_{1} = 
 	
 \end{enumerate}
 
-\item (6 pts) Supoose you trained a classifier for a spam detection system. The prediction result on the test set is summarized in the following table.
+\item (6 pts) Suppose you trained a classifier for a spam detection system. The prediction result on the test set is summarized in the following table.
 \begin{center}
 	\begin{tabular}{l l | l l}
 		&          & \multicolumn{2}{l}{Predicted class} \\
@@ -435,11 +435,16 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 				\hline
 				Fold & Accuracy & Precision & Recall \\
 				\hline
-				1  &  0.877  &  0.8462  &  0.6947  \\
-				2  &  0.867  &  0.8333  &  0.6498  \\
-				3  &  0.861  &  0.8756  &  0.5951  \\
-				4  &  0.849  &  0.8206  &  0.6224  \\
-				5  &  0.775  &  0.6695  &  0.5229  \\
+				1  &  0.890  &  0.8486  &  0.7474  \\
+				2  &  0.847  &  0.7520  &  0.6679  \\
+				3  &  0.829  &  0.9185  &  0.4366  \\
+				4  &  0.894  &  0.8431  &  0.7857  \\
+				5  &  0.846  &  0.8333  &  0.6209  \\
+				% 1  &  0.877  &  0.8462  &  0.6947  \\
+				% 2  &  0.867  &  0.8333  &  0.6498  \\
+				% 3  &  0.861  &  0.8756  &  0.5951  \\
+				% 4  &  0.849  &  0.8206  &  0.6224  \\
+				% 5  &  0.775  &  0.6695  &  0.5229  \\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -484,7 +489,7 @@ Compute the updated parameter vector $\theta^{1}$ from the single update step.
 	\begin{soln}
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=8cm]{../figs/spam_roc.png}
+			\includegraphics[width=8cm]{../figs/spam_roc2.png}
 			\caption*{kNN curve is in blue. Logistic Regression curve is in orange.}			
 		\end{figure}
 	\end{soln}
