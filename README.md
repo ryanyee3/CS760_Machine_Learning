@@ -4,13 +4,16 @@ This repository holds the code used for assignments in CS 760 at UW-Madison.
 
 ## Homework 1
 
-Content review/skills assessment on linear algebra, calculus, probability/statistics, geometry, and programming.
+Knowledge assessment on linear algebra, calculus, probability/statistics, geometry, and programming.
 
 ## Homework 2
 
-Decision Trees, Model Evaluation.
+Implementing decision trees.
 
 ## Homework 3
 
-kNN, implementing logistic regression, ROC curves, evaluation metrics.
+Model evaluation, kNN, and logistic regression.
 
+## Homework 4
+
+Prediciton, naive Bayes, and a simple neural network.
