@@ -125,7 +125,9 @@ Ryan Yee \\
 \maketitle 
 
 
-\textbf{Instructions:} Use this latex file as a template to develop your homework. Submit your homework on time as a single pdf file to Canvas. Late submissions may not be accepted. Please wrap your code and upload it to a public GitHub repo, then attach the link below the instructions so that we can access it. You can choose any programming language (i.e. python, R, or MATLAB). Please check Piazza for updates about the homework.
+\textbf{Instructions:} Use this latex file as a template to develop your homework. Submit your homework on time as a single pdf file to Canvas. Late submissions may not be accepted. Please wrap your code and upload it to a public GitHub repo, then attach the link below the instructions so that we can access it. You can choose any programming language (i.e. python, R, or MATLAB). Please check Piazza for updates about the homework. \\
+
+Code used for this assignment can be found at \url{https://github.com/ryanyee3/CS760_Machine_Learning/tree/master/homework4}
 
 \section{Best Prediction}
 \subsection{Under 0-1 Loss (10 pts)}
@@ -136,7 +138,22 @@ $$\E[\ind_{\hat x \neq x}]$$
 using the following two prediction strategies respectively?  Prove your answer.
 \begin{enumerate}
     \item Strategy 1: $\hat x \in \argmax_x \theta_x$, the outcome with the highest probability.
+    
+    \begin{soln}
+        Let $\theta^{*}$ be the outcome with the highest probability (i.e. $\theta_{y}$ where $y = \arg \max_{x} \theta_{x}$). 
+        Then, $\E[\ind_{\hat x \neq x}] = 1 - \theta^{*}$ since we expect to see an observation other than $\hat{x}$ with probability $1 - \theta^{*}$.
+    \end{soln}
+
     \item Strategy 2: You mimic the world by generating a prediction $\hat x \sim \mbox{multinomial}(\theta)$.  (Hint: your randomness and the world's randomness are independent)
+    
+    \begin{soln}
+        We generate $\hat x \in \theta_{i}$ with probability $\theta_{i}$.
+        Nature also generates $x \in \theta_{i}$ with probability $\theta_{i}$.
+        So $\mathbbm{P}(\hat x \neq x) = (1-\theta_{i})$.
+        The expectation is the weighted average of the potential outcomes.
+        So, $\E[\ind_{\hat x \neq x}] = \sum_{i = 1}^{k} \theta_{i} (1-\theta_{i})$
+    \end{soln}
+
 \end{enumerate}
 
 \subsection{Under Different Misclassification Losses (6 pts)}
