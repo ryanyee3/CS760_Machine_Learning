@@ -68,29 +68,5 @@ for l in range(len(L)):
     c = NaiveBayes(L[l], S, range(10))
     print(c.get_likelihood("e10"))
 
-# # get character counts
-# def get_counts(label, characters, files):
-#     counts = np.zeros(len(characters))
-#     for i in range(len(files)):
-#         file = open("homework4/data/languageID/" + label + str(files[i]) + ".txt")
-#         data = file.read()
-#         for c in range(len(characters)):
-#             counts[c] = counts[c] + data.count(characters[c])
-#     return(counts)
-
-# # get conditional probabilities
-# def get_probabilities(counts, characters):
-#     N = sum(counts)
-#     probs = []
-#     for i in range(len(characters)):
-#         p = (counts[i] + 0.5) / (N + 27 * 0.5)
-#         probs.append(p)
-#     return(probs)
-
-# # print character latex table
-# def print_table(values, characters, n_dec=4):
-#     for i in range(len(characters)):
-#         print(characters[i], "&", round(values[i], n_dec), "\\\\")
-
 if __name__=='__main__':
     pass
