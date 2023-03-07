@@ -204,6 +204,81 @@
 \node[fancytitle, right=10pt] at (box.north west) {Gradient Descent};
 \end{tikzpicture}
 
+\vfil\null
+\columnbreak
+
+% Probability Distributions
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Binomial:} $\binom{x}{n} \theta^x (1-\theta)^{n-x}$ \\
+            \textbf{Normal:} $(2\pi\sigma^{2})^{-\frac{1}{2}} 
+            \exp\left\{-\frac{1}{2\sigma^{2}}\left(x-\mu\right)^{\!2}\,\right\}$ \\
+            \textbf{Beta:} $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$ \\
+            \textbf{Gamma:} $\frac{r^{s}}{\Gamma(s)}x^{s-1} e^{-r x}$ \\
+            \textbf{Exponential:} $\lambda e^{-\lambda x}$
+        \end{minipage}
+    };
+% Probability Distributions Header
+\node[fancytitle, right=10pt] at (box.north west) {Probability Distributions};
+\end{tikzpicture}
+
+% Naive Bayes 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             Assumes conditional independence of features: \\
+             $$
+             \begin{aligned}
+                P(X_1, \dots, X_k, Y) & \propto P(X_1, \dots, X_k \mid Y) P(Y) \\
+                & = \left(\prod_{k=1}^{K} P(X_k \mid Y)\right) P(Y)  \\
+             \end{aligned}
+             $$
+        \end{minipage}
+    };
+% Naive Bayes Header
+\node[fancytitle, right=10pt] at (box.north west) {Naive Bayes};
+\end{tikzpicture}
+
+% Perceptrons
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             \begin{equation*}
+                \hat y(x) = 
+                \begin{cases}
+                    1, & w^{T}x \geq 0 \\
+                    0, & \text{otherwise}
+                \end{cases}
+             \end{equation*} \\
+        \textbf{Algorithm:} \\
+        for index $i$: \\
+        if $y^{(i)}w^{T}x^{(i)} < 1$ (i.e prediction is wrong): \\
+        then $w_{t+1} = w_{t} + y^{(i)}x^{(i)}$ \\
+        else $w_{t+1} = w_{t}$ \\
+        \textbf{Mistake Bound:} $(2 + D(S)^{2})\gamma(S)^{-2}$ \\
+        where $D(S)$ is the max diameter and $\gamma(S)$ is the largest margin we can have with dataset $S$
+        \end{minipage}
+    };
+% Perceptrons Header
+\node[fancytitle, right=10pt] at (box.north west) {Perceptrons};
+\end{tikzpicture}
+
+% Neural Networks
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            For a single internal node: \\
+            Input: $x$, Weights: $w$, Bias: $b$, Activation Function: $r$ \\
+            Output: $r(w^{T}x + b)$ which feeds into the next layer \\
+            Gradient Components: $\frac{\partial l}{\partial w} = (\hat y-y)x$, $\frac{\partial l}{\partial x} = (\hat y-y)w$ \\
+            2-Layer: $\frac{\partial l}{\partial w_{11}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial w_{11}^{(1)}} = (\hat y-y)w_{11}^{(2)} a_{11}(1-a_{11})x_{1}$
+        \end{minipage}
+    };
+% Neural Networks Header
+\node[fancytitle, right=10pt] at (box.north west) {Neural Networks};
+\end{tikzpicture}
+
 \end{multicols*}
 \end{document}
 
