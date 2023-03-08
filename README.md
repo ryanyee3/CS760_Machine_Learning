@@ -1,6 +1,6 @@
 # CS 760 - Machine Learning
 
-This repository holds the code used for assignments in CS 760 at UW-Madison.
+This repository holds the code used for assignments in [CS 760](https://pages.cs.wisc.edu/~kandasamy/courses/23spring-cs760/) at UW-Madison.
 
 ## Homework 1
 
