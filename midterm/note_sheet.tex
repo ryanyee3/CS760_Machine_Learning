@@ -27,16 +27,16 @@
 
 \advance\topmargin-.8in
 \advance\textheight3in
-\advance\textwidth3in
-\advance\oddsidemargin-1.5in
-\advance\evensidemargin-1.5in
+\advance\textwidth2.5in
+\advance\oddsidemargin-1.25in
+\advance\evensidemargin-1.25in
 \parindent0pt
 \parskip2pt
 \newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
 %\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
 \begin{document}
 
-\begin{center}{\huge{\textbf{CS 760 Midterm Note Sheet}}}\\
+\begin{center}{\huge{\textbf{Ryan Yee - CS 760 Midterm Note Sheet}}}\\
 \end{center}
 \begin{multicols*}{3}
 
@@ -90,7 +90,7 @@
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
              Entropy: $H(Y) = -\underset{y \in Y}{\sum} \mathbb{P}(y) \log_{2}(\mathbb{P}(y))$ \\
-             Conditional: $H(Y \vert X) = \underset{x \in X}{\sum} \mathbb{P}(X=x) H(Y \vert X=x)$ \\
+             $H(Y \vert X) = \underset{x \in X}{\sum} \mathbb{P}(X=x) H(Y \vert X=x)$ \\
              Information Gain: $H(Y) - H(Y \vert X)$ \\
              Gain Ratio: $\frac{H(Y)-H(Y \vert S)}{H(S)}$
         \end{minipage}
@@ -165,8 +165,9 @@
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
             Sigmoid: $\sigma(z) = \frac{1}{1+\exp(-z)} = \frac{\exp(z)}{1+\exp(z)} \in (0, 1)$ \\
-            Properties: $1-\sigma(z) = \sigma(-z)$, $\sigma^{'}(z) = \sigma(z)(1-\sigma(z))$ \\
-            Cross Entropy Loss: 
+            Properties: $1-\sigma(z) = \sigma(-z)$ \\
+            $\sigma^{'}(z) = \sigma(z)(1-\sigma(z))$ \\
+            Cross Entropy Loss: $-[y \log \hat y + (1 - y) \log (1 - \hat y)]$ %$-\underset{x \in \mathcal{X}}{\sum} p(x) \log q(x)$
         \end{minipage}
         };
 % Logistic Regression Header
@@ -178,6 +179,9 @@
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
              \textbf{Maximum Likelihood:} \\
+             $\hat{\theta}_{MLE} = \arg \underset{\theta}{\max} \mathcal{L}(\theta; X)$ \\
+             $\mathcal{L}(\theta; X) = \prod_{i=1}^{n} \mathbb{P}_{\theta}(x_i)$ \\
+             \textbf{Conditioned on X}: \\
              $\hat{\theta}_{MLE} = \arg \underset{\theta}{\max} \mathcal{L}(\theta; Y, X)$ \\
              $\mathcal{L}(\theta; Y, X) = \prod_{i=1}^{n} \mathbb{P}_{\theta}(y_i \vert x_i)$ \\
              \textbf{Maximum a posteriori Probability:} \\
@@ -193,11 +197,12 @@
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
              \textbf{Convergence Criteria:} \\
-             1. Convex: $f(\lambda x_{1} + (1-\lambda)x_{2}) \leq \lambda f(x_{1}) + (1-\lambda) f(x_{2})$ \\
+             1. Convex: \\
+             $f(\lambda x_{1} + (1-\lambda)x_{2}) \leq \lambda f(x_{1}) + (1-\lambda) f(x_{2})$ \\
              2. Differentiable \\
              3. Lipschitz-continuous: $\nabla^{2}f(x) \preccurlyeq LI$ \\
              recall: ($B-A$ is positive semidefinite if $A \preccurlyeq B$) \\
-             recall: if $C$ is positive semidefinite then $x^{T}Cx \geq 0$ $\forall x$
+             recall: if $C$ is pos. semidefinite then $x^{T}Cx \geq 0$ $\forall x$
         \end{minipage}
     };
 % Gradient Descent
@@ -207,21 +212,23 @@
 \vfil\null
 \columnbreak
 
-% Probability Distributions
-\begin{tikzpicture}
-    \node [mybox] (box){%
-        \begin{minipage}{0.3\textwidth}
-            \textbf{Binomial:} $\binom{x}{n} \theta^x (1-\theta)^{n-x}$ \\
-            \textbf{Normal:} $(2\pi\sigma^{2})^{-\frac{1}{2}} 
-            \exp\left\{-\frac{1}{2\sigma^{2}}\left(x-\mu\right)^{\!2}\,\right\}$ \\
-            \textbf{Beta:} $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$ \\
-            \textbf{Gamma:} $\frac{r^{s}}{\Gamma(s)}x^{s-1} e^{-r x}$ \\
-            \textbf{Exponential:} $\lambda e^{-\lambda x}$
-        \end{minipage}
-    };
-% Probability Distributions Header
-\node[fancytitle, right=10pt] at (box.north west) {Probability Distributions};
-\end{tikzpicture}
+% Professor said PDFs will be provided
+% % Probability Distributions
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%             \textbf{Binomial:} $\binom{x}{n} \theta^x (1-\theta)^{n-x}$ \\
+%             \textbf{Normal:} $(2\pi\sigma^{2})^{-\frac{1}{2}} 
+%             \exp\left\{-\frac{1}{2\sigma^{2}}\left(x-\mu\right)^{\!2}\,\right\}$ \\
+%             \textbf{Beta:} $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$ \\
+%             \textbf{Gamma:} $\frac{r^{s}}{\Gamma(s)}x^{s-1} e^{-r x}$ \\
+%             \textbf{Exponential:} $\lambda e^{-\lambda x}$ \\
+%             \textbf{Multinomial:} $\frac{n!}{x_{1}! \dots x_{k}!}p_{1}^{x_{1}} \dots p_{k}^{x_{k}}$
+%         \end{minipage}
+%     };
+% % Probability Distributions Header
+% \node[fancytitle, right=10pt] at (box.north west) {Probability Distributions};
+% \end{tikzpicture}
 
 % Naive Bayes 
 \begin{tikzpicture}
@@ -269,14 +276,97 @@
     \node [mybox] (box){%
         \begin{minipage}{0.3\textwidth}
             For a single internal node: \\
-            Input: $x$, Weights: $w$, Bias: $b$, Activation Function: $r$ \\
-            Output: $r(w^{T}x + b)$ which feeds into the next layer \\
-            Gradient Components: $\frac{\partial l}{\partial w} = (\hat y-y)x$, $\frac{\partial l}{\partial x} = (\hat y-y)w$ \\
-            2-Layer: $\frac{\partial l}{\partial w_{11}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial w_{11}^{(1)}} = (\hat y-y)w_{11}^{(2)} a_{11}(1-a_{11})x_{1}$
+            Input: $x$, Weights: $w$, Bias: $b$, Activation: $s$ \\
+            Output: $s(w^{T}x + b)$ which feeds into the next layer \\
+            \textbf{Gradient Components:} \\
+            $\frac{\partial l}{\partial w} = (\hat y-y)x$, $\frac{\partial l}{\partial x} = (\hat y-y)w$ \\
+            \textbf{2-Layer:} \\
+            $\frac{\partial l}{\partial w^{(1)}_{11}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial w_{11}^{(1)}} = (\hat y-y)w_{11}^{(2)} a_{11}(1-a_{11})x_{1}$ \\
+            $\frac{\partial l}{\partial x_{1}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial x_{1}} + \frac{\partial l}{\partial a_{12}}\frac{\partial a_{12}}{\partial x_{1}}$ \\
+            $ = (\hat y-y)w_{11}^{(2)}a_{11}(1-a_{11})w_{11}^{(1)} + (\hat y-y)w_{21}^{(2)}a_{12}(1-a_{12})w_{12}^{(1)}$
         \end{minipage}
     };
 % Neural Networks Header
 \node[fancytitle, right=10pt] at (box.north west) {Neural Networks};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% L2 Regularization
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Effect on GD:} \\
+            Loss: $\hat |_{R}(\theta) = \hat L(\theta) + \frac{\lambda}{2}||\theta||_{2}^{2}$ \\
+            Gradient: $\nabla \hat L_{R}(\theta) = \nabla \hat L(\theta) + \lambda \theta$ \\
+            GD Update: $\theta_{t+1} = (1 - \nu\lambda)\theta_{t} - \nu \nabla \hat L(\theta_{t})$ \\
+            Effect: decays weights by $(1-\nu\lambda)$ \\
+            \textbf{Effect on Optimal Solution:} \\
+            $\theta_{R}^{*} \approx (H + \lambda I)^{-1}H\theta^{*} = Q(\Lambda + \lambda I)^{-1}\Lambda Q^{T} \theta^{*}$ \\
+            Effect: shrinks along eigenvectors of $H$
+        \end{minipage}
+    };
+% L2 Regularization Header
+\node[fancytitle, right=10pt] at (box.north west) {L2 Regularization};
+\end{tikzpicture}
+
+% Other Regularization
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             1. Data augmentation (based on domain) \\
+             e.g. crop, rotate, thesaurus/back-translate \\
+             2. Adding noise (equivalent to weight decay) \\
+             3. Early stopping \\
+             4. Dropout (randomly select weights to update)
+        \end{minipage}
+    };
+% Other Regularization Header
+\node[fancytitle, right=10pt] at (box.north west) {Other Regularization};
+\end{tikzpicture}
+
+% 2D-Convolution
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             \textbf{Idea:} use an $k_h \times k_w$ kernel matrix which takes the sum product of the pixels in the image \\
+             \textbf{Padding:} adds $p_h$ rows and $p_w$ columns cushion on the edge of the image to preserve information \\
+             \textbf{Stride:} rows ($s_h$) and columns ($s_w$) per slide \\
+             Given $n_h \times n_w$ input, output will be $[(n_h - k_h + p_h + s_h) / s_h] \times [(n_w - k_w + p_w + s_w) / s_w]$ \\
+             \textbf{Pooling:} Similar to using a kernel but can do nonlinear transformations such as max pooling
+        \end{minipage}
+    };
+% 2D-Convolution Header
+\node[fancytitle, right=10pt] at (box.north west) {2D-Convolution};
+\end{tikzpicture}
+
+% 3D-Convolution
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            Let $c_i$ and $c_o$ be the \# of input and output channels \\
+             $\mathbf{X}$: $c_i \times n_h \times n_w$ \\
+             $\mathbf{W}$: $c_i \times c_o \times k_h \times k_w$ \\
+             $\mathbf{Y}$: $c_o \times m_h \times m_w$
+        \end{minipage}
+    };
+% 3D-Convolution Header
+\node[fancytitle, right=10pt] at (box.north west) {3D-Convolution};
+\end{tikzpicture}
+
+% Activation Functions
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            $\sigma(x) = \frac{e^{x}}{1+e^{x}}$ \\
+            $\text{ReLU}(x) = \max\{0, x\}$ \\
+            $\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}} = 2\sigma(2x) - 1$ \\
+            $\frac{d}{dx} \tanh(x) = 1 - \tanh^{2}(x)$ 
+        \end{minipage}
+    };
+% Activation Functions Header
+\node[fancytitle, right=10pt] at (box.north west) {Activation Functions};
 \end{tikzpicture}
 
 \end{multicols*}
