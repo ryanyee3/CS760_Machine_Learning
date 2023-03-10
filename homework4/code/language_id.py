@@ -11,10 +11,11 @@ L = ['e', 'j', 's']
 
 class NaiveBayes:
 
-    def __init__(self, label, characters, files):
+    def __init__(self, label, characters, files, alpha = 0.5):
         self.label = label
         self.characters = characters
         self.files = files
+        self.alpha = alpha
         self.counts = self.get_counts()
         self.probabilities = self.get_probabilities()
 
@@ -31,18 +32,18 @@ class NaiveBayes:
         N = sum(self.counts)
         probs = []
         for i in range(len(self.characters)):
-            p = (self.counts[i] + 0.5) / (N + 27 * 0.5)
+            p = (self.counts[i] + self.alpha) / (N + 27 * self.alpha)
             probs.append(p)
         return(probs)
     
-    def get_likelihood(self, filename):
+    def get_log_lik(self, filename):
         X = np.zeros(len(self.characters))
         file = open("homework4/data/languageID/" + filename + ".txt")
         data = file.read()
         for c in range(len(self.characters)):
             X[c] = data.count(self.characters[c])
         P = self.probabilities
-        return(sum([b * math.log(a) for a, b in zip(P, X)]))
+        return(sum([x * math.log(p) for p, x in zip(P, X)]))
 
     def print_table(self, type, n_dec=4):
         if type == 1:
@@ -52,21 +53,38 @@ class NaiveBayes:
         for i in range(len(self.characters)):
             print(self.characters[i], "&", round(values[i], n_dec), "\\\\")
 
-# # print theta tables
-# for l in range(len(L)):
-#     print(L[l])
-#     c = NaiveBayes(L[l], S, range(10))
-#     c.print_table(2)
-
-# # question 4
-# e = NaiveBayes("e", S, [10])
-# e.print_table(1)
-
-# question 5
-for l in range(len(L)):
-    print(L[l])
-    c = NaiveBayes(L[l], S, range(10))
-    print(c.get_likelihood("e10"))
-
 if __name__=='__main__':
+    # # print theta tables
+    # for l in range(len(L)):
+    #     print(L[l])
+    #     c = NaiveBayes(L[l], S, range(10))
+    #     c.print_table(2)
+
+    # # question 4
+    # e = NaiveBayes("e", S, [10])
+    # e.print_table(1)
+
+    # # question 5
+    # post = []
+    # for l in range(len(L)):
+    #     print(L[l])
+    #     c = NaiveBayes(L[l], S, range(10))
+    #     post.append(c.get_log_lik("e10"))
+    #     print(post[l])
+
+    # question 7
+    models = []
+    for m in range(len(L)):
+        models.append(NaiveBayes(L[m], S, range(10)))
+    
+    print("predicted", "actual")
+    for l in range(len(L)):
+        for f in range(10, 20):
+            name = L[l] + str(f)
+            log_lik = []
+            for m in range(len(models)):
+                log_lik.append(models[m].get_log_lik(name))
+            max_index = np.argmax(log_lik)
+            print(L[max_index], L[l])
+
     pass

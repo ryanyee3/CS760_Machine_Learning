@@ -324,6 +324,41 @@ Treat e10.txt as a test document $x$.
 Represent $x$ as a bag-of-words count vector (Hint: the vocabulary has size 27).
 Print the bag-of-words vector $x$.
 
+\begin{soln}
+    \begin{center}
+        \begin{tabular}{c | c}
+            $c_i$ & $x_i$ \\ \hline
+            a & 164.0 \\
+            b & 32.0 \\
+            c & 53.0 \\
+            d & 57.0 \\
+            e & 311.0 \\
+            f & 55.0 \\
+            g & 51.0 \\
+            h & 140.0 \\
+            i & 140.0 \\
+            j & 3.0 \\
+            k & 6.0 \\
+            l & 85.0 \\
+            m & 64.0 \\
+            n & 139.0 \\
+            o & 182.0 \\
+            p & 53.0 \\
+            q & 3.0 \\
+            r & 141.0 \\
+            s & 186.0 \\
+            t & 225.0 \\
+            u & 65.0 \\
+            v & 31.0 \\
+            w & 47.0 \\
+            x & 4.0 \\
+            y & 38.0 \\
+            z & 2.0 \\
+            `` '' & 498.0 \\
+        \end{tabular}
+    \end{center}
+\end{soln}
+
 \item
 For the $x$ of e10.txt, compute $\hat p(x \mid y)$ for $y=e, j, s$ under the multinomial model assumption, respectively.
 Use the formula
@@ -333,26 +368,76 @@ Show the three values: $\hat p(x \mid y=e), \hat p(x \mid y=j), \hat p(x \mid y=
 
 Hint: you may notice that we omitted the multinomial coefficient.  This is ok for classification because it is a constant w.r.t. $y$. Also, Store all probabilities here and below in $\log()$ internally to avoid underflow. This also means you need to do arithmetic in log space. 
 
+\begin{soln}
+    $$
+    \hat p(x \mid y=e) = \exp\{-7841.8654\}
+    $$
+    $$
+    \hat p(x \mid y=j) = \exp\{-8771.4331\}
+    $$
+    $$
+    \hat p(x \mid y=s) = \exp\{-8467.2820\}
+    $$
+\end{soln}
+
 \item
 For the $x$ of e10.txt, use the Bayes rule and your estimated prior and likelihood, compute the posterior $\hat p(y \mid x)$.
 Show the three values: $\hat p(y=e \mid x), \hat p(y=j \mid x), \hat p(y=s \mid x)$.
 Show the predicted class label of $x$.
 
+\begin{soln}
+    $$
+    p(y \mid x) = \frac{p(x \mid y) p(y)}{p(x)}
+    $$
+    From question (1), we know $p(y) = \frac{1}{3} \forall y$.
+    Also $p(x)$ is the same $\forall y$ since it does not depend on $y$. 
+    So, $p(y \mid x) \propto p(x \mid y)$ with some normalization constant such that $\sum_{i = 1}^{K_L} p(y = i \mid x) = 1$ (i.e. summing over all possible outcomes is 1).
+    The normalization constant is:
+    $$
+    c = \left( \sum_{i=1}^{K_L} p(x \mid y = i) \right)^{-1}
+    $$
+    Since we need to sum these probabilities, we cannot use the log scale; but this leads to numerical issues.
+    From the log probabilities, we can see $p(y = e \mid x)$ is about 930 times larger than $p(y = j \mid x)$ and 625 times larger than $p(y = s \mid x)$.
+    Therefore, the conditional probabilities are approximately:
+    $$
+    \hat p(y=e \mid x) \approx 1
+    $$
+    $$
+    \hat p(y=j \mid x) \approx 0
+    $$
+    $$
+    \hat p(y=s \mid x) \approx 0
+    $$ 
+    where,
+    $$
+    \hat p(y=s \mid x) > \hat p(y=j \mid x)
+    $$
+\end{soln}
+
 \item
 Evaluate the performance of your classifier on the test set (files 10.txt to 19.txt in three languages).
 Present the performance using a confusion matrix. A confusion matrix summarizes the types of errors your classifier makes, as shown in the table below.   The columns are the true language a document is in, and the rows are the classified outcome of that document.  The cells are the number of test documents in that situation.  For example, the cell with row = English and column = Spanish contains the number of test documents that are really Spanish but misclassified as English by your classifier.
 
+\begin{soln}
 \begin{center}
 \begin{tabular}{c|ccc}
 & English & Spanish & Japanese \\
 \hline
-English&&&\\
-Spanish&&&\\
-Japanese&&&
+English & 10 & 0 & 0 \\
+Spanish & 0 & 10 & 0 \\
+Japanese & 0 & 0 & 10
 \end{tabular}
 \end{center}
+\end{soln}
 
 \item Take a test document.   Arbitrarily shuffle the order of its characters so that the words (and spaces) are scrambled beyond human recognition.  How does this shuffling affect your Naive Bayes classifier's prediction on this document?  Explain the key mathematical step in the Naive Bayes model that justifies your answer.
+
+\begin{soln}
+    Shuffling the characters does not affect the prediction.
+    The key mathematical assumption that justifies this answer is the independence of features.
+    Because we assume the features are independent, the joint probability of some set of features is equal to the product of the feature probabilities of the individual features.
+    Since the characters in the document are still the same, just scrambled, the product of the feature probabilities does not change.
+\end{soln}
 
 \end{enumerate}
 
