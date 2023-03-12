@@ -456,6 +456,50 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
 
 \begin{enumerate}
     \item Derive backpropagation updates for the above neural network. (5 pts)
+    
+    \begin{soln}
+        First, consider the Jacobian on the softmax function.
+        Let $z_i$ denote the $i$th component of the input vector $z \in \mathbb{R}^{k}$ and let $g_j$ denote the $j$th component of the output vector $g \in \mathbb{R}^{k}$. Then the $ij$ entry of the Jacobian is:
+        $$
+        \begin{aligned}
+            \frac{\partial g_i}{\partial z_j} & = g_i \left[\frac{\partial}{\partial z_i} \log g_j \right] \\
+            & = g_i \left[ \frac{\partial}{\partial z_i} \left(z_j - \frac{\exp=(z_j)}{\sum_{i=1}^{k} \exp(z_i)}\right) \right] \\
+            & = g_i (\mathbbm{1}(j = i) - g_j)
+        \end{aligned}
+        $$
+        Next, we consider $\frac{\partial L}{\partial z_j}$:
+        $$
+        \begin{aligned}
+            \frac{\partial L}{\partial z_j} & = -\sum_{i = 1}^{k} \frac{y_i}{g_i} \frac{\partial g_i}{\partial z_j} \\
+            & = -\sum_{i = 1}^{k} \frac{y_i}{g_i} g_i (\mathbbm{1}(j = i) - g_j) \\
+            & = -\sum_{i = 1}^{k} y_i (\mathbbm{1}(j = i) - g_j) \\
+            & = \sum_{i = 1}^{k} y_i g_j - \sum_{i = 1}^{k} y_i \mathbbm{1}(j = i) \\
+            & = g_j - y_j
+        \end{aligned}
+        $$
+        So in matrix form $\frac{\partial L}{\partial \mathbf{z}} = \mathbf{g} - \mathbf{y}$. Let $a_0 = x$ and $a_i = \sigma(W_i a_{i-1})$ for $i \in \{1, 2, 3\}$. Then the update for $W_3$ is:
+        $$
+        \begin{aligned}
+            \frac{\partial L}{\partial W_3} & = \frac{\partial L}{\partial a_3} \frac{\partial a_3}{\partial W_3} \\
+            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) a_2
+        \end{aligned}
+        $$
+        The update for $W_2$ is:
+        $$
+        \begin{aligned}
+            \frac{\partial L}{\partial W_2} & = \frac{\partial L}{\partial a_2} \frac{\partial a_2}{\partial W_2} \\
+            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) W_3 a_2 (1 - a_2) a_1
+        \end{aligned}
+        $$
+        Finally, the update for $W_1$ is:
+        $$
+        \begin{aligned}
+            \frac{\partial L}{\partial W_1} & = \frac{\partial L}{\partial a_1} \frac{\partial a_1}{\partial W_1} \\
+            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) W_3 a_2 (1 - a_2) W_2 a_1 (1 - a_1) x
+        \end{aligned}
+        $$
+    \end{soln}
+
     \item Implement it in NumPy or PyTorch using basic linear algebra operations. (e.g. You are not allowed to use auto-grad, built-in optimizer, model, etc. in this step. You can use library functions for data loading, processing, etc.). Evaluate your implementation on MNIST dataset, report test errors and learning curve. (10 pts)
     \item Implement the same network in PyTorch (or any other framework). You can use all the features of the framework e.g. auto-grad etc. Evaluate it on MNIST dataset, report test errors, and learning curve. (2 pts)
     \item Try different weight initialization a) all weights initialized to 0, and b) initialize the weights randomly between -1 and 1. Report test error and learning curves for both. (You can use either of the implementations) (3 pts)
