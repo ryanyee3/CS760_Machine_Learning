@@ -503,6 +503,13 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
     \item Implement it in NumPy or PyTorch using basic linear algebra operations. (e.g. You are not allowed to use auto-grad, built-in optimizer, model, etc. in this step. You can use library functions for data loading, processing, etc.). Evaluate your implementation on MNIST dataset, report test errors and learning curve. (10 pts)
     
     \begin{soln}
+
+        Hyperparameters:
+        \begin{itemize}
+            \item step size = .00001
+            \item batch size = 60 
+        \end{itemize}
+
         \begin{figure}[H]
 			\centering
 			\includegraphics[width=0.6\textwidth]{../figs/learning_curve.png}
@@ -540,8 +547,15 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
     \end{soln}
 
     \item Implement the same network in PyTorch (or any other framework). You can use all the features of the framework e.g. auto-grad etc. Evaluate it on MNIST dataset, report test errors, and learning curve. (2 pts)
-    
+
     \begin{soln}
+
+        Hyperparameters:
+        \begin{itemize}
+            \item step size = .001
+            \item batch size = 64
+        \end{itemize}
+        
         \begin{figure}[H]
 			\centering
 			\includegraphics[width=0.6\textwidth]{../figs/pytorch_learning_curve.png}
@@ -580,6 +594,12 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
 
         a) Initialized with zeros:
 
+        Hyperparameters:
+        \begin{itemize}
+            \item step size = .001
+            \item batch size = 64
+        \end{itemize}
+
         \begin{figure}[H]
 			\centering
 			\includegraphics[width=0.6\textwidth]{../figs/init_zeros_learning_curve.png}
@@ -612,6 +632,12 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
         \end{center}
 
         b) Initialized with weights between -1 and 1:
+
+        Hyperparameters:
+        \begin{itemize}
+            \item step size = .001
+            \item batch size = 64
+        \end{itemize}
         
         \begin{figure}[H]
 			\centering
