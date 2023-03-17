@@ -575,6 +575,76 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
     \end{soln}
 
     \item Try different weight initialization a) all weights initialized to 0, and b) initialize the weights randomly between -1 and 1. Report test error and learning curves for both. (You can use either of the implementations) (3 pts)
+    
+    \begin{soln}
+
+        a) Initialized with zeros:
+
+        \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{../figs/init_zeros_learning_curve.png}
+		\end{figure}
+       
+        \begin{center}
+            \begin{tabular}{c | c}
+                Epoch & Test Error \\ \hline
+                1 & 88.65 \% \\
+                2 & 87.76 \% \\
+                3 & 72.9 \% \\
+                4 & 63.61 \% \\
+                5 & 75.4 \% \\
+                6 & 59.54 \% \\
+                7 & 56.38 \% \\
+                8 & 47.47 \% \\
+                9 & 40.43 \% \\
+                10 & 35.47 \% \\
+                11 & 30.63 \% \\
+                12 & 27.47 \% \\
+                13 & 24.58 \% \\
+                14 & 23.43 \% \\
+                15 & 21.48 \% \\
+                16 & 19.67 \% \\
+                17 & 18.34 \% \\
+                18 & 16.75 \% \\
+                19 & 16.01 \% \\
+                20 & 15.17 \% \\
+            \end{tabular}
+        \end{center}
+
+        b) Initialized with weights between -1 and 1:
+        
+        \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{../figs/neg_one_one_learning_curve.png}
+		\end{figure}
+       
+        \begin{center}
+            \begin{tabular}{c | c}
+                Epoch & Test Error \\ \hline
+                1 & 46.05 \% \\
+                2 & 31.5 \% \\
+                3 & 24.63 \% \\
+                4 & 18.45 \% \\
+                5 & 17.29 \% \\
+                6 & 15.3 \% \\
+                7 & 14.0 \% \\
+                8 & 13.11 \% \\
+                9 & 12.64 \% \\
+                10 & 12.02 \% \\
+                11 & 11.51 \% \\
+                12 & 11.08 \% \\
+                13 & 10.82 \% \\
+                14 & 10.49 \% \\
+                15 & 10.22 \% \\
+                16 & 10.05 \% \\
+                17 & 9.94 \% \\
+                18 & 9.58 \% \\
+                19 & 9.46 \% \\
+                20 & 9.35 \% \\
+            \end{tabular}
+        \end{center}
+    \end{soln}
+
 \end{enumerate}
 
 You should play with different hyperparameters like learning rate, batch size, etc. for your own learning. You only need to report results for any particular setting of hyperparameters. You should mention the values of those along with the results. Use $d_1 = 300$, $d_2 = 200$, $d_3 = 100$. For optimization use SGD (Stochastic gradient descent) without momentum, with some batch size say 32, 64, etc. MNIST can be obtained from here (https://pytorch.org/vision/ stable/datasets.html)

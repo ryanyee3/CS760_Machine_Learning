@@ -24,17 +24,23 @@ class NeuralNetwork(nn.Module):
     def __init__(self):
         super().__init__()
         self.flatten = nn.Flatten()
-        self.linear_sigmoid_stack = nn.Sequential(
-            nn.Linear(28*28, 300),
+        self.w1 = nn.Linear(28*28, 300)
+        self.w2 = nn.Linear(300, 200)
+        self.w3 = nn.Linear(200, 10)
+        nn.init.uniform_(self.w1.weight, a=-1, b=1)
+        nn.init.uniform_(self.w1.weight, a=-1, b=1)
+        nn.init.uniform_(self.w1.weight, a=-1, b=1)
+        self.stack = nn.Sequential(
+            self.w1,
             nn.Sigmoid(),
-            nn.Linear(300, 200),
+            self.w2,
             nn.Sigmoid(),
-            nn.Linear(200, 10),
+            self.w3,
         )
     
     def forward(self, x):
         x = self.flatten(x)
-        logits = self.linear_sigmoid_stack(x)
+        logits = self.stack(x)
         return logits
 
 model = NeuralNetwork()
@@ -105,7 +111,9 @@ plt.legend(loc="upper right")
 plt.title("Learning Curve")
 plt.xlabel("epoch")
 plt.ylabel("Average Loss")
-plt.savefig("homework4/figs/pytorch_learning_curve.png")
+# plt.savefig("homework4/figs/pytorch_learning_curve.png")
+# plt.savefig("homework4/figs/init_zeros_learning_curve.png")
+plt.savefig("homework4/figs/neg_one_one_learning_curve.png")
 
 if __name__ == '__main__':
     pass
