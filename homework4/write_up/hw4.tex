@@ -459,7 +459,7 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
     
     \begin{soln}
         First, consider the Jacobian on the softmax function.
-        Let $z_i$ denote the $i$th component of the input vector $z \in \mathbb{R}^{k}$ and let $g_j$ denote the $j$th component of the output vector $g \in \mathbb{R}^{k}$. Then the $ij$ entry of the Jacobian is:
+        Let $z_i$ denote the $i$th component of the softmax input vector $z \in \mathbb{R}^{k}$ and let $g_j$ denote the $j$th component of the output vector $g \in \mathbb{R}^{k}$. Then the $ij$ entry of the Jacobian is:
         $$
         \begin{aligned}
             \frac{\partial g_i}{\partial z_j} & = g_i \left[\frac{\partial}{\partial z_i} \log g_j \right] \\
@@ -480,28 +480,100 @@ L(x, y) = -\sum_{i=1}^k y \text{log}(\hat{y})
         So in matrix form $\frac{\partial L}{\partial \mathbf{z}} = \mathbf{g} - \mathbf{y}$. Let $a_0 = x$ and $a_i = \sigma(W_i a_{i-1})$ for $i \in \{1, 2, 3\}$. Then the update for $W_3$ is:
         $$
         \begin{aligned}
-            \frac{\partial L}{\partial W_3} & = \frac{\partial L}{\partial a_3} \frac{\partial a_3}{\partial W_3} \\
-            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) a_2
+            \frac{\partial L}{\partial W_3} & = \frac{\partial L}{\partial z} \frac{\partial z}{\partial W_3} \\
+            & = (\mathbf{g} - \mathbf{y}) a_2
         \end{aligned}
         $$
         The update for $W_2$ is:
         $$
         \begin{aligned}
             \frac{\partial L}{\partial W_2} & = \frac{\partial L}{\partial a_2} \frac{\partial a_2}{\partial W_2} \\
-            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) W_3 a_2 (1 - a_2) a_1
+            & = (\mathbf{g} - \mathbf{y}) W_3 a_2 (1 - a_2) a_1
         \end{aligned}
         $$
         Finally, the update for $W_1$ is:
         $$
         \begin{aligned}
-            \frac{\partial L}{\partial W_1} & = \frac{\partial L}{\partial a_1} \frac{\partial a_1}{\partial W_1} \\
-            & = (\mathbf{g} - \mathbf{y}) a_3 (1 - a_3) W_3 a_2 (1 - a_2) W_2 a_1 (1 - a_1) x
+        \frac{\partial L}{\partial W_1} & = \frac{\partial L}{\partial a_1} \frac{\partial a_1}{\partial W_1} \\
+        & = (\mathbf{g} - \mathbf{y}) W_3 a_2 (1 - a_2) W_2 a_1 (1 - a_1) x
         \end{aligned}
         $$
     \end{soln}
 
     \item Implement it in NumPy or PyTorch using basic linear algebra operations. (e.g. You are not allowed to use auto-grad, built-in optimizer, model, etc. in this step. You can use library functions for data loading, processing, etc.). Evaluate your implementation on MNIST dataset, report test errors and learning curve. (10 pts)
+    
+    \begin{soln}
+        \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{../figs/learning_curve.png}
+		\end{figure}
+
+        \begin{center}
+            \begin{tabular}{c | c}
+                Epoch & Test Error \\ \hline
+                1 & 89.9 \% \\
+                2 & 90.88 \% \\
+                3 & 91.68 \% \\
+                4 & 92.45 \% \\
+                5 & 92.89 \% \\
+                6 & 93.25 \% \\
+                7 & 93.3 \% \\
+                8 & 93.62 \% \\
+                9 & 93.66 \% \\
+                10 & 93.64 \% \\
+                11 & 93.58 \% \\
+                12 & 93.57 \% \\
+                13 & 93.62 \% \\
+                14 & 93.65 \% \\
+                15 & 93.67 \% \\
+                16 & 93.58 \% \\
+                17 & 93.58 \% \\
+                18 & 93.61 \% \\
+                19 & 93.62 \% \\
+                20 & 93.59 \% \\
+            \end{tabular}
+        \end{center}
+
+        Clearly there are some issues with my implementation.
+        It seems like all the predictions tend to converge around equal probability for all outcomes.
+        My hunch is that there is some step where I am inadvertently multiplying by index instead of matrix multiplication or vice versa but I was unable to figure out where.
+    \end{soln}
+
     \item Implement the same network in PyTorch (or any other framework). You can use all the features of the framework e.g. auto-grad etc. Evaluate it on MNIST dataset, report test errors, and learning curve. (2 pts)
+    
+    \begin{soln}
+        \begin{figure}[H]
+			\centering
+			\includegraphics[width=0.6\textwidth]{../figs/pytorch_learning_curve.png}
+		\end{figure}
+       
+        \begin{center}
+            \begin{tabular}{c | c}
+                Epoch & Test Error \\ \hline
+                1 & 88.65 \% \\
+                2 & 88.65 \% \\
+                3 & 83.25 \% \\
+                4 & 81.64 \% \\
+                5 & 63.55 \% \\
+                6 & 53.49 \% \\
+                7 & 44.28 \% \\
+                8 & 40.27 \% \\
+                9 & 35.25 \% \\
+                10 & 29.53 \% \\
+                11 & 26.75 \% \\
+                12 & 25.61 \% \\
+                13 & 22.71 \% \\
+                14 & 20.84 \% \\
+                15 & 19.15 \% \\
+                16 & 17.81 \% \\
+                17 & 16.9 \% \\
+                18 & 15.81 \% \\
+                19 & 15.01 \% \\
+                20 & 14.19 \% \\
+            \end{tabular}
+        \end{center}
+    \end{soln}
+
     \item Try different weight initialization a) all weights initialized to 0, and b) initialize the weights randomly between -1 and 1. Report test error and learning curves for both. (You can use either of the implementations) (3 pts)
 \end{enumerate}
 
