@@ -17,3 +17,8 @@ Model evaluation, kNN, and logistic regression.
 ## Homework 4
 
 Prediciton, naive Bayes, and a simple neural network.
+
+## Homework 5
+
+K-means, Gaussian mixture model, dimensionality reduction.
+
