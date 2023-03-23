@@ -18,10 +18,38 @@ J(\mu_1^K, f; X_1^n) = \sum_{i=1}^n \sum_{k=1}^K \indfone(f(X_i) = k) \|X_i - \m
 Let $\Jcal_K(X_1^n) = \min_{\mu_1^k, f} J(\mu_1^K, f; X_1^n)$. Prove that
 $\Jcal_{K}(X_1^n)$ is a non-increasing function of $K$.
 
+\begin{soln}
+    Prove via induction. 
+    Suppose $K = 1$. 
+    Now add one additional center so $K = 2$.
+    If $\mu_2 = \mu_1$ then every $X_i$ is equal and $\Jcal_1(X_1^n) = \Jcal_2(X_1^n)$.
+    Otherwise, if $\mu_2 \neq \mu_1$ then at least one $X_i \in \Xcal$ is closer to $\mu_2$ than $\mu_1$, thus $\Jcal_1(X_1^n) > \Jcal_2(X_1^n)$.
+    So $\Jcal_{K}(X_1^n)$ is a non-increasing function of $K$ when $K = 1$.
+    Now assume $\Jcal_{K}(X_1^n)$ is a non-increasing function of $K$ for $K = 1, 2, \dots, k$.
+    Now consider $K = k + 1$.
+    If $\exists i$ s.t. $\mu_i = \mu_{k+1}$, $i = 1, \dots, k$, then every $X_i$ is equal to some $\mu_i$ and $\Jcal_k(X_1^n) = \Jcal_{k+1}(X_1^n)$.
+    Otherwise, if $\mu_{k+1} \neq \mu_i \forall i = 1, \dots, k$ then at least one $X_i \in \Xcal$ is closer to $\mu_{k+1}$ than any other $\mu_i$, thus $\Jcal_k(X_1^n) > \Jcal_{k+1}(X_1^n)$.
+    So $\Jcal_{K}(X_1^n)$ is a non-increasing function of $K$ for any $K$.
+\end{soln}
+
 \item \textbf{(8 Points)}
 Consider the K-means (Lloyd's) clustering algorithm we studied in class. We
 terminate the algorithm when there are no changes to the objective.
 Show that the algorithm terminates in a finite number of steps.
+
+\begin{soln}
+    First, prove the objective function in Lloyd's algorithm is strictly decreasing.
+    Indeed, much like the EM algorithm, at each iteration Lloyd's algorithm finds the expected group of each observation and then maximizes the likelihood by moving the center to the optimal point among the points in its custer.
+    This maximization step guarantees the objective function will decrease in the next iteration of the algorithm will terminate.
+    Next, prove the Lloyd's algorithm will either terminate after finitely many steps or loop indefinitely.
+    There are a finite number of data points, therefore, there are a finite number of ways observations can be partitioned.
+    It follows that Lloyd's algorithm much terminate after finitely many steps or loop indefinitely.
+    But since the objective function is strictly decreasing, the algorithm cannot loop indefinitely.
+    Indeed, say at step $t$ the value of the objective function is $k_t$.
+    Then, $k_{t+q} < k_{t}$ for $q = 1, 2, \dots$.
+    But if the algorithm loops after $q$ iterations, then $k_t = k_{t + q}$ which is a contradiction.
+    So Lloyd's algorithm cannot loop indefinitely, so it must terminate after finitely many iterations.
+\end{soln}
 
 \end{enumerate}
 
