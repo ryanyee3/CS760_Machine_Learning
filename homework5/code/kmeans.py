@@ -54,9 +54,9 @@ def k_means(data, c1, c2, c3):
     
 def plot_kmeans(data, assignments, c1, c2, c3):
     plt.scatter(data[:,0], data[:,1], c=assignments, alpha=.5)
-    plt.scatter(a[0], a[1], s=100, c="red", marker="*")
-    plt.scatter(b[0], b[1], s=100, c="red", marker="*")
-    plt.scatter(c[0], c[1], s=100, c="red", marker="*")
+    plt.scatter(c1[0], c1[1], s=100, c="red", marker="*")
+    plt.scatter(c2[0], c2[1], s=100, c="red", marker="*")
+    plt.scatter(c3[0], c3[1], s=100, c="red", marker="*")
     plt.show()
 
 def get_accuracy(clusters, assignments):

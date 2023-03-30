@@ -97,18 +97,20 @@ def plot_gmm(data, labels, means):
     plt.scatter(means[2][0], means[2][1], s=100, c="red", marker="*")
     plt.show()
 
-def gmm(data, phi, mu, sig, iter):
+def gmm(data, phi, mu, sig, epsilon):
     w0 = get_expectations(data, phi, mu, sig)
     l0 = get_labels(w0)
+    loss0 = get_loss(w0, l0)
     p, m, s = maximize_params(data, w0)
     w1 = get_expectations(data, p, m, s)
     l1 = get_labels(w1)
+    loss1 = get_loss(w1, l1)
     # if iter % 10 == 0:
     #     print(iter, get_loss(w1, l1))
-    if iter == 100:
-        return p, m, s, get_loss(w1, l1)
+    if abs(loss0 - loss1) < epsilon:
+        return p, m, s, loss1
     else:
-        return gmm(data, p, m, s, iter+1)
+        return gmm(data, p, m, s, epsilon=epsilon)
 
 # experiment
 np.random.seed(5)
@@ -121,7 +123,7 @@ for i in range(len(sigma)):
     a, b, c = generate_data(sigma[i])
     data = np.array([a, b, c]).reshape(300, 2)
     mu, sig = initialize_params(sigma[i])
-    p, m, s, l = gmm(data, phi, mu, sig, 1)
+    p, m, s, l = gmm(data, phi, mu, sig, .1)
     loss.append(l)
     accuracy.append(get_accuracy(source, get_labels(get_expectations(data, p, m, s))))
 
