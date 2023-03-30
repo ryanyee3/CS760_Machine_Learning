@@ -166,6 +166,9 @@ representation $z_*$ for this new point.
 (If $x_*$ is some original point $x_i$ from the $D$--dimensional space, it shoud be the
 $d$--dimensional representation $z_i$.)
 
+\begin{soln}
+  $z_i = A^\top (x_i - b)$
+\end{soln}
 
 %\item \textbf{(1 Point)}
 % You are given a point $z_*$ in the $d$ dimensional space obtained using DRO.
@@ -358,6 +361,7 @@ $d$ dimensional representation $z_i$.
   \begin{center}
     \includegraphics[width=3in]{../figs/normalized_pca.png}
   \end{center}
+  \includegraphics[width=3in]{../figs/dro.png}
 
   % 2D Data Reconstruction Error
   \begin{center}
@@ -368,7 +372,7 @@ $d$ dimensional representation $z_i$.
       Buggy PCA & 0.886903 \\
       Demeaned PCA & 0.010006 \\
       Normalized PCA & 0.049472 \\
-      DRO & \\
+      DRO & 0.010006 \\
       DRLV & \\
       \hline
     \end{tabular}
@@ -379,7 +383,7 @@ $d$ dimensional representation $z_i$.
   \includegraphics[width=3in]{../figs/demeaned_error_curve.png} \\
   \begin{center}
     \includegraphics[width=3in]{../figs/normalized_error_curve.png}
-  \end{center}
+  \end{center} 
 
   The ``knee-point'' seems to be at $d = 500$ for all the PCA methods.
   This makes sense, because there are 500 observations in the 1000D data ($n=500$), which means its SVD has 500 singular values.
@@ -394,7 +398,7 @@ $d$ dimensional representation $z_i$.
       Buggy PCA & 352741 \\
       Demeaned PCA & 18509 \\
       Normalized PCA & 18503 \\
-      DRO & \\
+      DRO & 18509 \\
       DRLV & \\
       \hline
     \end{tabular}
@@ -408,6 +412,12 @@ reconstructed points don't seem to well represent the original points. Why is
 this? \\
 \textbf{Hint: } Which subspace is Buggy PCA trying to project the points
 onto?
+
+\begin{soln}
+  Buggy PCA is trying to project onto a subspace that passes through the origin.
+  In the other PCA methods, we account for this by subtracting the mean from each dimension so the mean of each dimension is zero.
+\end{soln}
+
 \item The error criterion we are using is the average squared error 
 between the original points and the reconstructed points.
 In both examples DRO and demeaned PCA achieves the lowest error among all
