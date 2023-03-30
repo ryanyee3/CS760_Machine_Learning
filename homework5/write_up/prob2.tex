@@ -100,11 +100,22 @@ Here, $\|A\|^2_F = \sum_{i,j} A_{ij}^2$ is the Frobenius norm of a matrix.
 \begin{enumerate}
 \item \textbf{(3 Points)}
 Let $M\in\RR^{d\times d}$ be an arbitrary invertible matrix and $p\in\RR^{d}$ be an arbitrary vector.
-Denote, $A_2 = A_1M^{-1}$, $b_2 = b_1- A_1M^{-1}p$ and $Z_2 = Z_1 C^\top +
+Denote, $A_2 = A_1M^{-1}$, $b_2 = b_1- A_1M^{-1}p$ and $Z_2 = Z_1 M^\top +
 \one p^\top$.
 Show that both
 $(A_1, b_1, Z_1)$ and $(A_2, b_2, Z_2)$ achieve the same objective value $J$~\eqref{eqn:dimobj}.
 \end{enumerate}
+
+\begin{soln}
+  $$
+  \begin{aligned}
+    J & = \| X - Z_2A_2^\top - \one b_2^\top \| \\
+    & = \| X - (Z_1 M^\top + \one p^\top)(A_1M^{-1})^\top - \one (b_1- A_1M^{-1}p)^\top \| \\
+    & = \| X - Z_1 M^\top M^{-\top}A_1^\top - \one p^\top M^{-\top}A_1^\top - \one b_1^\top + \one p^\top M^{-\top}A_1^\top \| \\
+    & = \| X - Z_1A_1^\top - \one b_1^\top \|
+  \end{aligned}
+  $$
+\end{soln}
 
 Therefore, in order to make the problem determined, we need to impose some
 constraint on $Z$. We will assume that the $z_i$'s have zero mean and identity covariance.
@@ -125,6 +136,28 @@ would obtain $A, Z, b$ which minimize the objective and satisfy the constraints.
 
 \textbf{Hint: }The rank $k$ approximation of a matrix in Frobenius norm is obtained by
 taking its SVD and then zeroing out all but the first $k$ singular values.
+
+\begin{soln}
+  Note that in the best case $X - ZA^\top - \one b^\top = 0$.
+  First, solve for $b$:
+  \begin{gather*}
+    X - ZA^\top - \one b^\top = 0 \\
+    X - ZA^\top = \one b^\top \\
+    X^\top - AZ^\top = b \one^\top \\
+    X^\top \one - AZ^\top \one = b n \\
+    \frac{1}{n} X^\top \one = b \\
+    \frac{1}{n} \sum_{i=1}^{n} x_i = b 
+  \end{gather*}
+  Next, find $Q=ZA^\top$:
+  \begin{gather*}
+    X - Q - \one b^\top = 0 \\
+    Q = X - \one b^\top
+  \end{gather*}
+  Note that the rows of $Q$ have mean zero.
+  Using the \textit{hint} from above, the rank $k$ approximation of $Q$ is its SVD with all but the first $k$ singular values singled out.
+  So, let $A_k = [a_1, \dots, a_k]$ where $a_i$ is the $i$th right singular vector of $Q$.
+
+\end{soln}
 
 \item \textbf{(3 Points)}
 You are given a point $x_*$ in the original $D$ dimensional space.
@@ -191,6 +224,36 @@ Let $X\in \RR^{r\times c}$, and $u\in \RR^r$, $v,w \in \RR^c$.
 \item \textbf{(10 Points)}
 Assuming some given values for $A$, $b$, and $\eta^2$, write down the joint distribution of $(z,x)$. Use this to derive the marginal
 distribution of $x$ and the conditional distribution $z|x$. 
+
+\begin{soln}
+  $$
+  \begin{aligned}
+    \mathbbm{P}(x, z) & = \mathbbm{P}(x \vert z) \mathbbm{P}(z) \\
+    & = (2 \pi)^{-D/2} \det(\eta^2 I)^{-1/2} \exp\left\{-\frac{1}{2} (x - Az -  b)^\top (\eta^2 I)^{-1} (x - Az -b) \right\} (2 \pi)^{-d/2} \exp\left\{ -\frac{1}{2} z^\top z\right\} \\
+    & = (2 \pi)^{-\frac{D + d}{2}} \det(\eta^2 I)^{-1/2} \exp\left\{-\frac{1}{2} \left((x - Az -  b)^\top (\eta^2 I)^{-1} (x - Az -b) + \eta^2 z^\top z\right) \right\}
+    % & = (2 \pi)^{-\frac{D + d}{2}} \det(\eta^2 I)^{-1/2} \exp\left\{-\frac{1}{2 \eta^2} (x^\top x - (Az+b)^\top x - x^\top (Az+b) + (Az+b)^\top (Az+b) + \eta^2 z^\top z) \right\} \\
+    % & = 
+  \end{aligned}
+  $$
+
+  We can assume $x$ follows a Gaussian distribution. 
+  It is straightforward to see $\mathbbm{E}[X] = b$ and $\text{Var}(X) = (\eta^2 + 1)I$.
+  So, $x \sim \Ncal(b, (\eta^2 + 1)I)$.
+  Then, using \textbf{Fact 1} we have $z \vert x \sim \Ncal()$
+  % \begin{gather*}
+  %   \mathbbm{E}[(X - b)^\top (X - b)] \\
+  %   \mathbbm{E}[X^\top X - X^\top b - b^\top X + b^\top b] \\
+  %   \eta^2 I + \mathbbm{E}[- X^\top b - b^\top X + b^\top b] \\
+  %   \eta^2 I + \mathbbm{E}[- 2X^\top b + b^\top b] \\
+  %   \eta^2 I + \mathbbm{E}[(- 2X^\top + b^\top) b] \\
+  % \end{gather*}
+
+  % $$
+  % \begin{aligned}
+  %   \mathbbm{P}(x) & = \int (2 \pi)^{-\frac{D + d}{2}} \det(\eta^2 I)^{-1/2} \exp\left\{-\frac{1}{2} \left((x - Az -  b)^\top (\eta^2 I)^{-1} (x - Az -b) + z^\top z\right) \right\} dz \\
+  % \end{aligned}
+  % $$
+\end{soln}
 
 \item \textbf{(4 points)}
 Write the log likelihood in terms of parameters $A$, $b$, and $\eta^2$.
@@ -286,6 +349,57 @@ differences $\sum_{i=1}^n \|x_i - r(z_i)\|^2$,
 where $x_i$'s are the original points and $r(z_i)$ are the $D$ dimensional points
 reconstructed from the 
 $d$ dimensional representation $z_i$.
+
+\begin{soln}
+
+  % 2D Visualizations
+  \includegraphics[width=3in]{../figs/buggy_pca.png} \hspace{0.1in}
+  \includegraphics[width=3in]{../figs/demeaned_pca.png} \\
+  \begin{center}
+    \includegraphics[width=3in]{../figs/normalized_pca.png}
+  \end{center}
+
+  % 2D Data Reconstruction Error
+  \begin{center}
+    \textbf{2D Data} \\
+    \begin{tabular}{ c  c }
+      \hline
+      Method & Reconstruction Error \\ \hline
+      Buggy PCA & 0.886903 \\
+      Demeaned PCA & 0.010006 \\
+      Normalized PCA & 0.049472 \\
+      DRO & \\
+      DRLV & \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  % 1000D Error Curves
+  \includegraphics[width=3in]{../figs/buggy_error_curve.png} \hspace{0.1in}
+  \includegraphics[width=3in]{../figs/demeaned_error_curve.png} \\
+  \begin{center}
+    \includegraphics[width=3in]{../figs/normalized_error_curve.png}
+  \end{center}
+
+  The ``knee-point'' seems to be at $d = 500$ for all the PCA methods.
+  This makes sense, because there are 500 observations in the 1000D data ($n=500$), which means its SVD has 500 singular values.
+  I will use $d=500$ for all the methods.
+
+  % 1000D Data Reconstruction Error
+  \begin{center}
+    \textbf{1000D Data} \\
+    \begin{tabular}{ c  c }
+      \hline
+      Method & Reconstruction Error \\ \hline
+      Buggy PCA & 352741 \\
+      Demeaned PCA & 18509 \\
+      Normalized PCA & 18503 \\
+      DRO & \\
+      DRLV & \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{soln}
 
 \item \textbf{Questions:} After you have completed the experiments, please answer the following questions.
 \begin{enumerate}
