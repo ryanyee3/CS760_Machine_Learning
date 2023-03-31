@@ -199,7 +199,7 @@ EM with a continuous latent variable which has a parametric distribution.
 The following results will be useful.\\
 
 \begin{fact}[Conditional of a Gaussian]
-Say $(Y_1, Y_2), Y_i \in \RR^{d_i}$ is Gaussian distribued.
+Say $(Y_1, Y_2), Y_i \in \RR^{d_i}$ is Gaussian distributed.
 \[
 \left(\begin{array}{c}Y_1 \\ Y_2\end{array}\right) =
 \Ncal \left( \left(\begin{array}{c} \mu_1 \\ \mu_2 \end{array} \right), 
@@ -244,10 +244,10 @@ distribution of $x$ and the conditional distribution $z|x$.
   Then 
   $$
   \begin{aligned}
-    \text{Var}(X) & = \mathbbm{E}[(X-b)^\top (X-b)] \\
-    & = \mathbbm{E}[(AZ + \epsilon)^\top (AZ + \epsilon)] \\
-    & = \mathbbm{E}[Z^\top A^\top AZ + 2 Z^\top A^\top \epsilon + \epsilon^\top \epsilon] \\
-    & = A^\top A + \eta^2 I
+    \text{Var}(X) & = \mathbbm{E}[(X-b) (X-b)^\top] \\
+    & = \mathbbm{E}[(AZ + \epsilon) (AZ + \epsilon)^\top] \\
+    & = \mathbbm{E}[AZZ^\top A^\top +2 AZ \epsilon^\top + \epsilon \epsilon^\top] \\
+    & = AA^\top + \eta^2 I
   \end{aligned}
   $$
   So, $x \sim \Ncal(b, A^\top A + \eta^2 I)$.
@@ -260,14 +260,14 @@ distribution of $x$ and the conditional distribution $z|x$.
     & = A^\top
   \end{aligned}
   $$
-  Using \textbf{Fact 1} we have $z \vert x \sim \Ncal(A(A^\top A + \eta^2 I)^{-1}(x-b), I - A(A^\top A + \eta^2 I)^{-1}A^\top)$
+  Using \textbf{Fact 1} we have $z \vert x \sim \Ncal(A(AA^\top + \eta^2 I)^{-1}(x-b), I - A(AA^\top + \eta^2 I)^{-1}A^\top)$
 \end{soln}
 
 \item \textbf{(4 points)}
 Write the log likelihood in terms of parameters $A$, $b$, and $\eta^2$.
 
 \begin{soln}
-  $\mathcal{L}(A, b, \eta^2) = \sum_{i=1}^{n} -\frac{D}{2} \log(2 \pi) -\frac{1}{2} \log(\det(A^\top A + \eta^2 I)) -\frac{1}{2} (x-b)^\top (A^\top A + \eta^2 I)^{-1} (x-b)$
+  $\mathcal{L}(A, b, \eta^2) = \sum_{i=1}^{n} -\frac{D}{2} \log(2 \pi) -\frac{1}{2} \log(\det(AA^\top + \eta^2 I)) -\frac{1}{2} (x-b)^\top (AA^\top + \eta^2 I)^{-1} (x-b)$
 \end{soln}
 
 \item \textbf{(4 Points)}
@@ -276,14 +276,14 @@ First obtain the Maximum Likelihood Estimate for $b$. This does not require EM.
 \begin{soln}
   $$
   \begin{aligned}
-    \frac{\partial \mathcal{L}}{\partial b} & = \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[-\frac{1}{2} (x-b)^\top (A^\top A + \eta^2 I)^{-1} (x-b)\right] \\
-    & = -\frac{1}{2} \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[b^\top (A^\top A + \eta^2 I)^{-1} b - 2b^\top(A^\top A + \eta^2 I)^{-1}x \right] \\
-    & = -\frac{1}{2} \sum_{i=1}^{n} \left[2 (A^\top A + \eta^2 I)^{-1} b - 2(A^\top A + \eta^2 I)^{-1}x \right] \\
+    \frac{\partial \mathcal{L}}{\partial b} & = \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[-\frac{1}{2} (x-b)^\top (AA^\top + \eta^2 I)^{-1} (x-b)\right] \\
+    & = -\frac{1}{2} \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[b^\top (AA^\top + \eta^2 I)^{-1} b - 2b^\top(AA^\top + \eta^2 I)^{-1}x \right] \\
+    & = -\frac{1}{2} \sum_{i=1}^{n} \left[2 (AA^\top + \eta^2 I)^{-1} b - 2(AA^\top + \eta^2 I)^{-1}x \right] \\
   \end{aligned}
   $$
   Setting $\frac{\partial \mathcal{L}}{\partial b} = 0$:
   \begin{gather*}
-    (A^\top A + \eta^2 I)^{-1} bn = (A^\top A + \eta^2 I)^{-1} \sum_{i=1}^{n} x_i \\
+    (AA^\top + \eta^2 I)^{-1} bn = (AA^\top + \eta^2 I)^{-1} \sum_{i=1}^{n} x_i \\
     b = \frac{1}{n} \sum_{i=1}^{n} x_i
   \end{gather*}
 \end{soln}
@@ -292,6 +292,15 @@ First obtain the Maximum Likelihood Estimate for $b$. This does not require EM.
 To apply the EM algorithm,
 let $Q(z_i)$  denote some distribution over $z_i$ for each $z_i$.
 Obtain a lower bound on the log likelihood via Jensen's inequality.
+
+\begin{soln}
+  $$
+  \begin{aligned}
+    \mathcal{L}(A, b, \eta^2) & = \sum_{i=1}^{n} \log\left(\sum_{j=1}^{k} Q(z_j) \frac{p(x_i, z_j)}{Q(z_j)} \right) \\
+    & \geq \sum_{i=1}^{n} \sum_{j=1}^{k} Q(z_j) \log\left(\frac{p(x_i, z_j)}{Q(z_j)}\right)
+  \end{aligned}
+  $$
+\end{soln}
 
 \item \textbf{(4 Points)}
 Recall, from the lectures, that we chose
@@ -303,9 +312,50 @@ Write down the E-step update for the next iteration. \\
 N.B: Unlike in GMMs, where the latent variable was discrete, here the latent variable is continuous. Fortunately, it has a parametric form we can represent $Q(z_i)$ using a finite number of parameters. \\
 (Hint: See part 1)
 
+\begin{soln}
+  \begin{gather*}
+    w^{(i)}_j = \mathbb{P}(z_i = j \vert x_i; A, b, \eta^2) \\
+    w^{(i)} \sim \Ncal(A(AA^\top + \eta^2 I)^{-1}(x_i-b), I - A(AA^\top + \eta^2 I)^{-1}A^\top)
+  \end{gather*}
+  So we can calculate $w^{(i)}_j$ for any $j$.
+\end{soln}
+
 \item \textbf{(10 Points)}
 Now write down the M-step update for parameters $A$ and $\eta$, obtained
 by maximizing the lower bound obtained from parts 3 and 4.
+
+\begin{soln}
+  $$
+  \begin{aligned}
+    \mathcal{L}(A, b, \eta^2; X, Z) & = \log p(X \vert Z) + \log p(z) \\
+    & = -\frac{1}{2} \left[-2\log(\det(\eta^2 I)^{-1}) + (X-AZ-b)^\top (\eta^2 I)^{-1} (X-AZ-b)+Z^\top Z\right]
+  \end{aligned}
+  $$
+  To maximize $A$:
+  $$
+  \begin{aligned}
+    \frac{\partial \mathcal{L}}{\partial A} & = -\frac{1}{2} \frac{\partial}{\partial A} \left[(X-AZ-b)^\top (\eta^2 I)^{-1} (X-AZ-b)\right] \\
+    & = -\frac{1}{2} \frac{\partial}{\partial A} \left[-2 Z^\top A^\top (\eta^2 I)^{-1}(X-b) + Z^\top A^\top AZ \right] \\
+    & = (\eta^2 I)^{-1}(X-b)Z^\top - A(I + ZZ^\top) \\
+  \end{aligned}
+  $$
+  Set $\frac{\partial \mathcal{L}}{\partial A} = 0$:
+  $$
+  \begin{aligned}
+    A(I + ZZ^\top) & = (\eta^2 I)^{-1}(X-b)Z^\top \\
+    A & = (\eta^2 I)^{-1}(X-b)Z^\top (I + ZZ^\top)^{-1}
+  \end{aligned}
+  $$
+  To maximize $\eta^2$:
+  $$\frac{\partial \mathcal{L}}{\partial \eta^2} = -\frac{1}{\eta^2} + \frac{1}{2 (\eta^2)^2}(X-AZ-b)^\top(X-AZ-b)$$
+  Set $\frac{\partial \mathcal{L}}{\partial \eta^2} = 0$:
+  $$
+  \begin{aligned}
+    \frac{1}{\eta^2} & = \frac{1}{2 (\eta^2)^2}(X-AZ-b)^\top(X-AZ-b) \\
+    \eta^2 & = (X-AZ-b)^\top(X-AZ-b)
+  \end{aligned}
+  $$
+\end{soln}
 
 % \item \textbf{(2 Points)}
 % You are given a point $x_*$ in the original $D$ dimensional space.
