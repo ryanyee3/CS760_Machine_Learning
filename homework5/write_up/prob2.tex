@@ -240,22 +240,27 @@ distribution of $x$ and the conditional distribution $z|x$.
   $$
 
   We can assume $x$ follows a Gaussian distribution. 
-  It is straightforward to see $\mathbbm{E}[X] = b$ and $\text{Var}(X) = (\eta^2 + 1)I$.
-  So, $x \sim \Ncal(b, (\eta^2 + 1)I)$.
-  Then, using \textbf{Fact 1} we have $z \vert x \sim \Ncal()$
-  % \begin{gather*}
-  %   \mathbbm{E}[(X - b)^\top (X - b)] \\
-  %   \mathbbm{E}[X^\top X - X^\top b - b^\top X + b^\top b] \\
-  %   \eta^2 I + \mathbbm{E}[- X^\top b - b^\top X + b^\top b] \\
-  %   \eta^2 I + \mathbbm{E}[- 2X^\top b + b^\top b] \\
-  %   \eta^2 I + \mathbbm{E}[(- 2X^\top + b^\top) b] \\
-  % \end{gather*}
-
-  % $$
-  % \begin{aligned}
-  %   \mathbbm{P}(x) & = \int (2 \pi)^{-\frac{D + d}{2}} \det(\eta^2 I)^{-1/2} \exp\left\{-\frac{1}{2} \left((x - Az -  b)^\top (\eta^2 I)^{-1} (x - Az -b) + z^\top z\right) \right\} dz \\
-  % \end{aligned}
-  % $$
+  It is straightforward to see $\mathbbm{E}[X] = b$.
+  Then 
+  $$
+  \begin{aligned}
+    \text{Var}(X) & = \mathbbm{E}[(X-b)^\top (X-b)] \\
+    & = \mathbbm{E}[(AZ + \epsilon)^\top (AZ + \epsilon)] \\
+    & = \mathbbm{E}[Z^\top A^\top AZ + 2 Z^\top A^\top \epsilon + \epsilon^\top \epsilon] \\
+    & = A^\top A + \eta^2 I
+  \end{aligned}
+  $$
+  So, $x \sim \Ncal(b, A^\top A + \eta^2 I)$.
+  Then:
+  $$
+  \begin{aligned}
+    Cov(x, z) & = \mathbbm{E}[X^\top Z] \\
+    & = \mathbbm{E}[(AZ + b + \epsilon)^\top Z] \\
+    & = \mathbbm{E}[Z^\top A^\top Z + b^\top Z + \epsilon^\top Z] \\
+    & = A^\top
+  \end{aligned}
+  $$
+  Using \textbf{Fact 1} we have $z \vert x \sim \Ncal(A(A^\top A + \eta^2 I)^{-1}(x-b), I - A(A^\top A + \eta^2 I)^{-1}A^\top)$
 \end{soln}
 
 \item \textbf{(4 points)}
@@ -423,6 +428,13 @@ between the original points and the reconstructed points.
 In both examples DRO and demeaned PCA achieves the lowest error among all
 methods. 
 Is this surprising? Why?
+
+\begin{soln}
+  This is not surprising.
+  Demeaned PCA is equivalent to DRO.
+  In problem 2.2, we derived DRO such that the reconstruction error was minimized.
+\end{soln}
+
 \end{enumerate}
 
 \item Point allocation:
