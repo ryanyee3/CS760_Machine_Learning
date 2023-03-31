@@ -336,14 +336,14 @@ by maximizing the lower bound obtained from parts 3 and 4.
   \begin{aligned}
     \frac{\partial \mathcal{L}}{\partial A} & = -\frac{1}{2} \frac{\partial}{\partial A} \left[(X-AZ-b)^\top (\eta^2 I)^{-1} (X-AZ-b)\right] \\
     & = -\frac{1}{2} \frac{\partial}{\partial A} \left[-2 Z^\top A^\top (\eta^2 I)^{-1}(X-b) + Z^\top A^\top AZ \right] \\
-    & = (\eta^2 I)^{-1}(X-b)Z^\top - A(I + ZZ^\top) \\
+    & = (\eta^2 I)^{-1}(X-b)Z^\top - A(ZZ^\top) \\
   \end{aligned}
   $$
   Set $\frac{\partial \mathcal{L}}{\partial A} = 0$:
   $$
   \begin{aligned}
-    A(I + ZZ^\top) & = (\eta^2 I)^{-1}(X-b)Z^\top \\
-    A & = (\eta^2 I)^{-1}(X-b)Z^\top (I + ZZ^\top)^{-1}
+    A(ZZ^\top) & = (\eta^2 I)^{-1}(X-b)Z^\top \\
+    A & = (\eta^2 I)^{-1}(X-b)Z^\top (ZZ^\top)^{-1}
   \end{aligned}
   $$
   To maximize $\eta^2$:
