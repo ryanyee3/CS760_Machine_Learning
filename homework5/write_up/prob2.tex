@@ -266,8 +266,27 @@ distribution of $x$ and the conditional distribution $z|x$.
 \item \textbf{(4 points)}
 Write the log likelihood in terms of parameters $A$, $b$, and $\eta^2$.
 
+\begin{soln}
+  $\mathcal{L}(A, b, \eta^2) = \sum_{i=1}^{n} -\frac{D}{2} \log(2 \pi) -\frac{1}{2} \log(\det(A^\top A + \eta^2 I)) -\frac{1}{2} (x-b)^\top (A^\top A + \eta^2 I)^{-1} (x-b)$
+\end{soln}
+
 \item \textbf{(4 Points)}
 First obtain the Maximum Likelihood Estimate for $b$. This does not require EM.
+
+\begin{soln}
+  $$
+  \begin{aligned}
+    \frac{\partial \mathcal{L}}{\partial b} & = \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[-\frac{1}{2} (x-b)^\top (A^\top A + \eta^2 I)^{-1} (x-b)\right] \\
+    & = -\frac{1}{2} \sum_{i=1}^{n} \frac{\partial}{\partial b} \left[b^\top (A^\top A + \eta^2 I)^{-1} b - 2b^\top(A^\top A + \eta^2 I)^{-1}x \right] \\
+    & = -\frac{1}{2} \sum_{i=1}^{n} \left[2 (A^\top A + \eta^2 I)^{-1} b - 2(A^\top A + \eta^2 I)^{-1}x \right] \\
+  \end{aligned}
+  $$
+  Setting $\frac{\partial \mathcal{L}}{\partial b} = 0$:
+  \begin{gather*}
+    (A^\top A + \eta^2 I)^{-1} bn = (A^\top A + \eta^2 I)^{-1} \sum_{i=1}^{n} x_i \\
+    b = \frac{1}{n} \sum_{i=1}^{n} x_i
+  \end{gather*}
+\end{soln}
 
 \item \textbf{(10 Points)}
 To apply the EM algorithm,
