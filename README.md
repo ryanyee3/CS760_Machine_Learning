@@ -22,3 +22,7 @@ Prediciton, naive Bayes, and a simple neural network.
 
 K-means, Gaussian mixture model, dimensionality reduction.
 
+## Homework 6
+
+Generative adversarial networks (GAN) and graphical models.
+
