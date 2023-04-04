@@ -247,8 +247,8 @@
 		
 		\begin{soln} 
 			$$J = \begin{bmatrix}
-				1 & 1 \\
-				1 & -1 \\
+				\frac{1}{2} & \frac{1}{2} \\
+				\frac{1}{2} & -\frac{1}{2} \\
 			\end{bmatrix}$$
 		\end{soln}
 		
@@ -261,11 +261,11 @@
 		\begin{soln}
 			$$ \begin{aligned}
 				f_{U,V}(u,v) & = f_{X,Y}(x,y)\left(\frac{U+V}{2}, \frac{U-V}{2}\right)|\det(J)|\\
-				& = (2\pi)^{-1}\exp\left(-\frac{(U+V)^2}{8}\right)\exp\left(-\frac{(U-V)^2}{8}\right) |-2|\\
-				& = (\pi)^{-1}\exp\left(-\frac{(U^2+2UV+V^2+U^2-2UV+V^2)}{8}\right) \\
-				& = (\pi)^{-1}\exp\left(-\frac{2(U^2+V^2)}{8}\right) \\ 
-				& = (\pi)^{-1}\exp\left(-\frac{(U^2+V^2)}{4}\right) \\ 
-				& = \frac{\sqrt{2}}{\sqrt{2\pi}}\exp\left(-\frac{U^2}{4}\right)\frac{\sqrt{2}}{\sqrt{2\pi}}\exp\left(-\frac{V^2}{4}\right) \\
+				& = (2\pi)^{-1}\exp\left(-\frac{(U+V)^2}{8}\right)\exp\left(-\frac{(U-V)^2}{8}\right) |-\frac{1}{2}|\\
+				& = (4\pi)^{-1}\exp\left(-\frac{(U^2+2UV+V^2+U^2-2UV+V^2)}{8}\right) \\
+				& = (4\pi)^{-1}\exp\left(-\frac{2(U^2+V^2)}{8}\right) \\ 
+				& = (4\pi)^{-1}\exp\left(-\frac{(U^2+V^2)}{4}\right) \\ 
+				& = \frac{1}{\sqrt{2\pi}\sqrt{2}}\exp\left(-\frac{U^2}{4}\right)\frac{1}{\sqrt{2\pi}\sqrt{2}}\exp\left(-\frac{V^2}{4}\right) \\
 			\end{aligned} $$
 		\end{soln}
 		
@@ -276,7 +276,7 @@
 		
 		\begin{soln}
 			$$ \begin{aligned}
-				f_{U,V}(x+y, x-y)|\det(J)^{-1}| & = (\pi)^{-1}\exp\left(-\frac{((x+y)^2+(x-y)^2)}{4}\right) |-\frac{1}{2}| \\
+				f_{U,V}(x+y, x-y)|\det(J)^{-1}| & = (4\pi)^{-1}\exp\left(-\frac{((x+y)^2+(x-y)^2)}{4}\right) |-2| \\
 				& = (2\pi)^{-1}\exp\left(-\frac{(x^2+2xy+y^2+x^2-2xy+y^2)}{4}\right) \\
 				& = (2\pi)^{-1}\exp\left(-\frac{(x^2+y^2)}{2}\right) \\
 				& = (2\pi)^{-1/2}\exp\left(-\frac{x^2}{2}\right) (2\pi)^{-1/2}\exp\left(-\frac{y^2}{2}\right) \\
