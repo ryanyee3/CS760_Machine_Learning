@@ -81,6 +81,7 @@
 \def\E{\mathbb E}
 \def\V{\mathbb V}
 \def\ind{\mathbbm 1}
+\newcommand{\Pbbm}{\mathbbm{P}}
 
 % TO SHOW SOLUTIONS, include following (else comment out):
 \newenvironment{soln}{
@@ -294,7 +295,36 @@ Consider the directed graphical model (aka Bayesian network) in Figure~\ref{fig:
 \end{figure}
 Compute $P(B=t \mid E=f,J=t,M=t)$ and $P(B=t \mid E=t,J=t,M=t)$. (10 points for each) These are the conditional probabilities of a burglar in your house (yikes!) when both of your neighbors John and Mary call you and say they hear an alarm in your house, but without or with an earthquake also going on in that area (what a busy day), respectively.
 
-\begin{soln}  Solution goes here. \end{soln}
+\begin{soln}
+	$$\Pbbm(B=t \mid E=f,J=t,M=t) = \frac{\Pbbm(B=t, E=f,J=t,M=t)}{\Pbbm(E=f,J=t,M=t)}$$
+	$$ \begin{aligned}
+		\Pbbm(B=t, E=f,J=t,M=t) & = \sum_A \Pbbm(j=t \mid A) \Pbbm(M=t \mid A) \Pbbm(A \mid B=t, E=f) \Pbbm(B=t) \Pbbm(E=f) \\
+		& = (0.9 \times 0.7 \times 0.8 \times 0.1 \times 0.8) + (0.2 \times 0.1 \times 0.2 \times 0.1 \times 0.8) \\
+		& = 0.04032 + 0.00032 \\
+		& = 0.04064
+	\end{aligned} $$
+	$$ \begin{aligned}
+		\Pbbm(E=f,J=t,M=t) & = \sum_{A} \sum_{B} \Pbbm(j=t \mid A) \Pbbm(M=t \mid A) \Pbbm(A \mid B, E=f) \Pbbm(B) \Pbbm(E=f) \\
+		& = 0.04064 + (0.9 \times 0.7 \times 0.1 \times 0.9 \times 0.8) + (0.2 \times 0.1 \times 0.9 \times 0.9 \times 0.8) \\
+		& = 0.04064 + 0.04536 + 0.01296 \\
+		& = 0.09896
+	\end{aligned} $$
+	So, $$\Pbbm(B=t \mid E=f,J=t,M=t) = \frac{0.04064}{0.09896} = 0.410670978$$
+	Similarly, $$\Pbbm(B=t \mid E=t,J=t,M=t) = \frac{\Pbbm(B=t, E=t,J=t,M=t)}{\Pbbm(E=t,J=t,M=t)}$$
+	$$ \begin{aligned}
+		\Pbbm(B=t, E=t,J=t,M=t) & = \sum_A \Pbbm(j=t \mid A) \Pbbm(M=t \mid A) \Pbbm(A \mid B=t, E=t) \Pbbm(B=t) \Pbbm(E=t) \\
+		& = (0.9 \times 0.7 \times 0.9 \times 0.1 \times 0.2) + (0.2 \times 0.1 \times 0.1 \times 0.1 \times 0.2) \\
+		& = 0.01134 + .00004 \\
+		& = 0.01138
+	\end{aligned} $$
+	$$ \begin{aligned}
+		\Pbbm(E=t,J=t,M=t) & = \sum_{A} \sum_{B} \Pbbm(j=t \mid A) \Pbbm(M=t \mid A) \Pbbm(A \mid B, E=t) \Pbbm(B) \Pbbm(E=t) \\
+		& = 0.01138 + (0.9 \times 0.7 \times 0.3 \times 0.9 \times 0.2) + (0.2 \times 0.1 \times 0.7 \times 0.9 \times 0.2) \\
+		& = 0.01138 + 0.03402 + 0.00252\\
+		& = 0.04792
+	\end{aligned} $$
+	So, $$\Pbbm(B=t \mid E=t,J=t,M=t) = \frac{0.01138}{0.04792} = 0.237479132$$
+\end{soln}
 
 
 \section{Chow-Liu Algorithm [25 pts]}
