@@ -355,11 +355,50 @@ Suppose we wish to construct a directed graphical model for 3 features $X$, $Y$,
 \end{table}
 
 \begin{enumerate}
-	\item Compute the mutual information $I(X, Y)$ based on the frequencies observed in the data. (5 pts)
-	\item Compute the mutual information $I(X, Z)$ based on the frequencies observed in the data. (5 pts)
-	\item Compute the mutual information $I(Z, Y)$ based on the frequencies observed in the data. (5 pts)
-	\item Which undirected edges will be selected by the Chow-Liu algorithm as the maximum spanning tree? (5 pts)
-	\item Root your tree at node $X$, assign directions to the selected edges. (5 pts)
+	\item Compute the mutual information $I(X, Y)$ based on the frequencies observed in the data. (5 pts) \\
+	\begin{soln}	
+		$$ \begin{aligned}
+			I(X, Y) & = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} P(x, y) \log_2 \frac{P(x, y)}{P(x)P(y)} \\
+			& = 0.4 \log_2 \frac{0.4}{(0.5)(0.5)} % (T, T)
+			  + 0.1 \log_2 \frac{0.1}{(0.5)(0.5)} % (T, F)
+			  + 0.1 \log_2 \frac{0.1}{(0.5)(0.5)} % (F, T)
+			  + 0.4 \log_2 \frac{0.4}{(0.5)(0.5)} \\ % (F, F)
+			& = 0.2712 - 0.1322 - 0.1322 + 0.2712 \\
+			& = 0.2781
+		\end{aligned} $$
+	\end{soln}
+	\item Compute the mutual information $I(X, Z)$ based on the frequencies observed in the data. (5 pts) \\
+	\begin{soln}	
+		$$ \begin{aligned}
+			I(X, Z) & = \sum\limits_{x \in \mathcal{X}} \sum\limits_{z \in \mathcal{Z}} P(x, z) \log_2 \frac{P(x, z)}{P(x)P(z)} \\
+			& = 0.38 \log_2 \frac{0.38}{(0.5)(0.55)} % (T, T)
+			  + 0.12 \log_2 \frac{0.12}{(0.5)(0.45)} % (T, F)
+			  + 0.17 \log_2 \frac{0.17}{(0.5)(0.55)} % (F, T)
+			  + 0.33 \log_2 \frac{0.33}{(0.5)(0.45)} \\ % (F, F)
+			& = 0.1773 - 0.1088 - 0.1180 + 0.1823 \\
+			& = 0.1328
+		\end{aligned} $$
+	\end{soln}
+	\item Compute the mutual information $I(Z, Y)$ based on the frequencies observed in the data. (5 pts) \\
+	\begin{soln}	
+		$$ \begin{aligned}
+			I(Z, Y) & = \sum\limits_{z \in \mathcal{Z}} \sum\limits_{y \in \mathcal{Y}} P(z, y) \log_2 \frac{P(z, y)}{P(z)P(y)} \\
+			& = 0.45 \log_2 \frac{0.45}{(0.55)(0.5)} % (T, T)
+			  + 0.1 \log_2 \frac{0.1}{(0.55)(0.5)} % (T, F)
+			  + 0.05 \log_2 \frac{0.05}{(0.45)(0.5)} % (F, T)
+			  + 0.4 \log_2 \frac{0.4}{(0.45)(0.5)} \\ % (F, F)
+			& = 0.3197 - 0.1459 - 0.1085 + 0.3320 \\
+			& = 0.3973
+		\end{aligned} $$
+	\end{soln}
+	\item Which undirected edges will be selected by the Chow-Liu algorithm as the maximum spanning tree? (5 pts) \\
+	\begin{soln}
+		Edges $(Z, Y)$ and $(X, Y)$ would be selected.
+	\end{soln}
+	\item Root your tree at node $X$, assign directions to the selected edges. (5 pts) \\
+	\begin{soln}
+		$X \rightarrow Y \rightarrow Z$
+	\end{soln}
 \end{enumerate}
 
 	\bibliography{hw6}
