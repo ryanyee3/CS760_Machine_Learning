@@ -12,3 +12,5 @@ homework4/data/MNIST
 *.bbl
 *.blg
 *.html
+homework6/data/output/*.png
+homework6/data/input/
