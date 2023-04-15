@@ -272,8 +272,42 @@
 		\item Except the method that we used in (a), how can we improve training for GAN? Implement that and report your setup, learning curves, and generated images in epoch 1, 50, 100.
 		\hfill (5 pts)
 		
-		\begin{soln}  Solution goes here. Attach your learning curve and images. \end{soln}
+		\begin{soln}
+			Based on this \href{https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html}{DCGAN PyTorch tutorial} we could specify the betas in our Adam optimizer to be (.5, .999) instead of the \href{https://pytorch.org/docs/stable/generated/torch.optim.Adam.html#torch.optim.Adam}{default} (.9, .999).
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\textwidth]{../figs/opt_loss.png}
+				\caption{Learning curve}
+				\label{fig:q3_loss}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/opt_gen_img1.png}
+					\caption{epoch 1}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/opt_gen_img50.png}
+					\caption{epoch 50}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/opt_gen_img100.png}
+					\caption{epoch 100}
+				\end{subfigure}
+				\caption{Generated images by $G$}
+				\label{fig:q3_images}
+			\end{figure}
+		\end{soln}
 		
+
+
 	\end{enumerate}
 
 	\section{Review change of variables in probability density functions [25 pts]} In Flow based generative model, we have seen $p_{\theta}(x)=p(f_{\theta}(x))|\frac{\partial f_{\theta}(x)}{\partial x}|$. As a hands-on (fixed parameter) example, consider the following setting.\\
