@@ -237,7 +237,37 @@
 		, and report learning curves and generated images in epoch 1, 50, 100. Compare the result with (a). Note that it may not work. If training does not work, explain why it doesn't work.
 		\hfill (10 pts)
 		
-		\begin{soln}  Solution goes here. Attach your learning curve and images. \end{soln}
+		\begin{soln}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\textwidth]{../figs/new_loss_loss.png}
+				\caption{Learning curve}
+				\label{fig:q2_loss}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/new_loss_gen_img1.png}
+					\caption{epoch 1}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/new_loss_gen_img50.png}
+					\caption{epoch 50}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/new_loss_gen_img100.png}
+					\caption{epoch 100}
+				\end{subfigure}
+				\caption{Generated images by $G$}
+				\label{fig:q2_images}
+			\end{figure}
+		\end{soln}
 		
 		\item Except the method that we used in (a), how can we improve training for GAN? Implement that and report your setup, learning curves, and generated images in epoch 1, 50, 100.
 		\hfill (5 pts)
