@@ -163,7 +163,7 @@
 		\end{algorithm}
 		
 		Expected results are as follows.
-		
+
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=0.7\textwidth]{gan_q1_loss.png}
@@ -195,7 +195,37 @@
 		\end{figure}
 		
 		
-		\begin{soln}  Solution goes here. Attach your learning curve and images. \end{soln}
+		\begin{soln}
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=0.7\textwidth]{../figs/loss.png}
+				\caption{Learning curve}
+				\label{fig:q1_loss}
+			\end{figure}
+			
+			\begin{figure}[H]
+				\centering
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/gen_img1.png}
+					\caption{epoch 1}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/gen_img50.png}
+					\caption{epoch 50}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[b]{0.3\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{../figs/gen_img100.png}
+					\caption{epoch 100}
+				\end{subfigure}
+				\caption{Generated images by $G$}
+				\label{fig:q1_images}
+			\end{figure}
+		\end{soln}
 		
 		
 		
