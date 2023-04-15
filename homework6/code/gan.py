@@ -5,7 +5,6 @@ import torch.optim as optim
 import torchvision.datasets as datasets
 import imageio
 import numpy as np
-import matplotlib
 from torchvision.utils import make_grid, save_image
 from torch.utils.data import DataLoader
 from matplotlib import pyplot as plt
