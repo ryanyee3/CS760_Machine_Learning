@@ -159,7 +159,7 @@ for epoch in range(epochs):
         loss_D.backward()
         optim_d.step()
 
-        loss_d += loss_D
+        loss_d += loss_D.detach().numpy()
 
         ### UPDATE GENERATOR ###
         optim_g.zero_grad() # initialize gradient
@@ -171,7 +171,7 @@ for epoch in range(epochs):
         loss_G.backward()
         optim_g.step()
 
-        loss_g += loss_G
+        loss_g += loss_G.detach().numpy()
         ######################################
     
     
@@ -189,7 +189,7 @@ for epoch in range(epochs):
         # plt.show()
     
     # save the generated torch tensor models to disk
-    save_generator_image(generated_img, f"homework6/data/outputs/gen_img{epoch+1}.png")
+    save_generator_image(generated_img, f"homework6/data/output/gen_img{epoch+1}.png")
     images.append(generated_img)
     epoch_loss_g = loss_g / bi # total generator loss for the epoch
     epoch_loss_d = loss_d / bi # total discriminator loss for the epoch
@@ -200,18 +200,18 @@ for epoch in range(epochs):
     print(f"Generator loss: {epoch_loss_g:.8f}, Discriminator loss: {epoch_loss_d:.8f}")
 
 print('DONE TRAINING')
-torch.save(generator.state_dict(), 'homework6/data/outputs/generator.pth')
+torch.save(generator.state_dict(), 'homework6/data/output/generator.pth')
 
 # save the generated images as GIF file
 imgs = [np.array(to_pil_image(img)) for img in images]
-imageio.mimsave('homework6/data/outputs/generator_images.gif', imgs)
+imageio.mimsave('homework6/data/output/generator_images.gif', imgs)
 
 # plot and save the generator and discriminator loss
 plt.figure()
 plt.plot(losses_g, label='Generator loss')
 plt.plot(losses_d, label='Discriminator Loss')
 plt.legend()
-plt.savefig('homework6/data/outputs/loss.png')
+plt.savefig('homework6/data/output/loss.png')
 
 
 if __name__ == '__main__':
