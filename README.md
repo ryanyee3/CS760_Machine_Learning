@@ -26,3 +26,6 @@ K-means, Gaussian mixture model, dimensionality reduction.
 
 Generative adversarial networks (GAN) and graphical models.
 
+## Homework 7
+
+Support vector machines, kernel SVM, VC dimension, and Q-learning.
