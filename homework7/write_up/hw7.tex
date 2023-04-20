@@ -153,13 +153,30 @@ k(z,z') =
 \begin{enumerate}
 \item (5 pts) Prove that for any integer $m>0$, any $z_1, \ldots, z_m \in Z$, the $m \times m$ kernel matrix $K=[K_{ij}]$ is positive semi-definite, where $K_{ij}=k(z_i, z_j)$ for $i,j=\{1\ldots m\}$. (Let us assume that for $i \neq j$, we have $z_i \neq z_j$.)
 
+\begin{soln}
+    If we assume that for $i \neq j$, we have $z_i \neq z_j$ then the kernel matrix $K$ is the identity matrix since there will be ones on the diagonal and zeros everywhere else.
+    The identity matrix is positive semi-definite because $\forall \mathbf{x} \in \mathbbm{R}^n, \mathbf{x}^{T}I\mathbf{x} = \sum\limits_{i=1}^{n} x_i^2 \geq 0$.
+    So $K$ is positive semi-definite.
+\end{soln}
+
 \item (5 pts) Given a training set $(z_1, y_1), \ldots, (z_n, y_n)$ with binary labels, the dual SVM problem with the above kernel $k$ will have parameters $\alpha_1, \ldots, \alpha_n, b \in \R$.  (Assume that for $i \neq j$, we have $z_i \neq z_j$.) The predictor for input $z$ takes the form
 $$f(z) = \sum_{i=1}^n \alpha_i y_i k(z_i, z) + b.$$
 Recall the label prediction is $\sgn(f(z))$.
 Prove that there exists $\alpha_1, \ldots, \alpha_n, b$ such that $f$ correctly separates the training set.
 In other words, $k$ induces a feature space rich enough such that in it any training set can be linearly separated.
 
+\begin{soln}
+    Let $\alpha_i = 1$ if the label is 1 and -1 otherwise. Let $b=0$.
+    This set of predictors will perfectly separate the training set.
+    Indeed, $\forall i \neq j, k(z_i, z_j) = 0$ so the expression inside the summation will be zero for every $z_i$ except when $z = z_i$.
+    So the only parameter that matters for the prediction is the $\alpha_i$ corresponding to $z$ and we've set $\alpha_i$ based on its label.
+\end{soln}
+
 \item (5 pts) How does that $f$ predict input $z$ that is not in the training set?
+
+\begin{soln}
+    It would output $bn$ or $b$ if we don't include it in the summation.
+\end{soln}
 
 \end{enumerate}
 
