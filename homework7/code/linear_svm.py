@@ -51,26 +51,5 @@ class LinearSVM():
         return self.w, self.b
 
 
-
-
-
-
-
-
-
-
-# inputs
-# p = 2 # number of parameters
-# step_size = .001
-
-# # define linear_svm class
-# w = torch.tensor(torch.rand(p), requires_grad=True)
-# b = torch.tensor(1, requires_grad=True)
-
-
-# define linear_svm loss function
-
-# 
-
 if __name__=='__main__':
     pass
