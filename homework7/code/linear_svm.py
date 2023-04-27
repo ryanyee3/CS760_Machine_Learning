@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
+from sklearn.metrics import accuracy_score
 
 
 class LinearSVM():
@@ -28,7 +29,7 @@ class LinearSVM():
         '''
         return data @ self.w - self.b
     
-    def train(self, data, labels, C, epochs, step_size):
+    def train(self, data, labels, C, epochs, step_size, verbose=True):
         '''
         data        ---> 
         labels      --->
@@ -39,16 +40,30 @@ class LinearSVM():
         X = torch.tensor(data, dtype=torch.double)
         y = torch.tensor(labels, dtype=torch.double)
         for i in range(epochs):
+
+            # forward pass
             predictions = self.forward(X)
+
+            # backward pass
             loss = self.loss(predictions, y, C)
             loss.backward()
+
+            # update parameters
             self.w.data -= step_size * self.w.grad
             self.b.data -= step_size * self.b.grad
             self.w.grad.zero_()
             self.b.grad.zero_()
-            if i % 100 == 0:
+
+            # report results
+            if verbose & (i % 100 == 0):
                 print(f"Epoch {i} of {epochs} ---> Loss: {loss:.8f}")
+        
         return self.w, self.b
+    
+    def get_accuracy(self, data, labels):
+        X = torch.tensor(data, dtype=torch.double)
+        pred_labels = torch.where(self.forward(X) < 0, -1, 1)
+        return accuracy_score(pred_labels, labels)
 
 
 if __name__=='__main__':
