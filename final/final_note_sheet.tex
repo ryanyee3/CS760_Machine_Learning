@@ -1,0 +1,589 @@
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb, bbm}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{multirow}
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\title{CS 760 Final Note Sheet}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth2.5in
+\advance\oddsidemargin-1.25in
+\advance\evensidemargin-1.25in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\begin{document}
+
+\begin{center}{\huge{\textbf{Ryan Yee - CS 760 Final Note Sheet}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+% Information Theory
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             Entropy: $H(Y) = -\underset{y \in Y}{\sum} \mathbb{P}(y) \log_{2}(\mathbb{P}(y))$ \\
+             $H(Y \vert X) = \underset{x \in X}{\sum} \mathbb{P}(X=x) H(Y \vert X=x)$ \\
+             Information Gain: $H(Y) - H(Y \vert X)$ \\
+             Gain Ratio: $\frac{H(Y)-H(Y \vert S)}{H(S)}$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Information Theory};
+\end{tikzpicture}
+
+% Evaluation
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            % \begin{tabular}{l|l|c|c|c}
+            %     \multicolumn{2}{c}{}&\multicolumn{2}{c}{Observed Class}&\\
+            %     \cline{3-4}
+            %     \multicolumn{2}{c|}{}&True&False&\multicolumn{1}{c}{}\\
+            %     \cline{2-4}
+            %     \multirow{2}{*}{Predicted Class}& True & $TP$ & $FP$ & \\
+            %     \cline{2-4}
+            %     & False & $FN$ & $TN$ & \\
+            %     \cline{2-4}
+            % \end{tabular} \\
+             Accuracy: $\frac{TP + TN}{TP + FP + TN + FN}$, Error: 1 - Accuracy \\
+             Precision: $\frac{TP}{TP + FP}$, Recall: $\frac{TP}{TP + FN}$, FPR: $\frac{FP}{TN + FP}$ 
+            %  ROC Curve: recall (TPR) vs. false positive rate \\
+            %  Precision/Recall Curve: downward sloping with asymptote
+        \end{minipage}
+    };
+% Evaluation Header
+\node[fancytitle, right=10pt] at (box.north west) {Evaluation};
+\end{tikzpicture}
+
+% Estimation 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             \textbf{Maximum Likelihood:} \\
+             $\hat{\theta}_{MLE} = \arg \underset{\theta}{\max} \mathcal{L}(\theta; X)$ \\
+             $\mathcal{L}(\theta; X) = \prod_{i=1}^{n} \mathbb{P}_{\theta}(x_i)$ \\
+             \textbf{Conditioned on X}: \\
+             $\hat{\theta}_{MLE} = \arg \underset{\theta}{\max} \mathcal{L}(\theta; Y, X)$ \\
+             $\mathcal{L}(\theta; Y, X) = \prod_{i=1}^{n} \mathbb{P}_{\theta}(y_i \vert x_i)$ \\
+             \textbf{Maximum a posteriori Probability:} \\
+             $\hat{\theta}_{MAP} = \arg \underset{\theta}{\max} \prod_{i=1}^{n} p(x^{(i)} \vert \theta) p(\theta)$ 
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Estimation};
+\end{tikzpicture}
+
+% Logistic Regression
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            Sigmoid: $\sigma(z) = \frac{1}{1+\exp(-z)} = \frac{\exp(z)}{1+\exp(z)} \in (0, 1)$ \\
+            Properties: $1-\sigma(z) = \sigma(-z)$ \\
+            $\sigma^{'}(z) = \sigma(z)(1-\sigma(z))$ \\
+            Cross Entropy Loss: $-[y \log \hat y + (1 - y) \log (1 - \hat y)]$ %$-\underset{x \in \mathcal{X}}{\sum} p(x) \log q(x)$
+        \end{minipage}
+        };
+\node[fancytitle, right=10pt] at (box.north west) {Logistic Regression};
+\end{tikzpicture}
+
+% Linear Regression
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             Loss: $\ell(f_{\theta}) = \frac{1}{n} ||\mathbf{X}\theta - y||^{2}_{2}$ \\ 
+             Gradient: $\nabla_{\theta} = \frac{1}{n}(2\mathbf{X}^{T}\mathbf{X}\theta - 2\mathbf{X}^{T}y)$ \\
+             Solution: $\theta = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}y$ \\
+             Ridge Loss: $\ell(f_{\theta}) = \frac{1}{n} ||\mathbf{X}\theta - y||^{2}_{2} + \lambda||\theta||^{2}_{2}$ \\  
+             Ridge Sol: $\theta = (\mathbf{X}^{T}\mathbf{X} + \lambda n I)^{-1}\mathbf{X}^{T}y$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Linear Regression};
+\end{tikzpicture}
+
+% Regularization
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             1. Data augmentation (based on domain) \\
+             e.g. crop, rotate, thesaurus/back-translate \\
+             2. Adding noise (equivalent to weight decay) \\
+             3. Early stopping \\
+             4. Dropout (randomly select weights to update)
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Regularization Techniques};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% Naive Bayes 
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             Assumes conditional independence of features: \\
+             $$
+             \begin{aligned}
+                P(X_1, \dots, X_k, Y) & \propto P(X_1, \dots, X_k \mid Y) P(Y) \\
+                & = \left(\prod_{k=1}^{K} P(X_k \mid Y)\right) P(Y)  \\
+             \end{aligned}
+             $$
+        \end{minipage}
+    };
+% Naive Bayes Header
+\node[fancytitle, right=10pt] at (box.north west) {Naive Bayes};
+\end{tikzpicture}
+
+% Gradient Descent
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+             \textbf{Convergence Criteria:} \\
+             1. Convex: \\
+             $f(\lambda x_{1} + (1-\lambda)x_{2}) \leq \lambda f(x_{1}) + (1-\lambda) f(x_{2})$ \\
+             2. Differentiable \\
+             3. Lipschitz-continuous: $\nabla^{2}f(x) \preccurlyeq LI$ \\
+             recall: ($B-A$ is positive semidefinite if $A \preccurlyeq B$) \\
+             recall: if $C$ is pos. semidefinite then $x^{T}Cx \geq 0$ $\forall x$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Gradient Descent};
+\end{tikzpicture}
+
+% Neural Networks
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            For a single internal node: \\
+            Input: $x$, Weights: $w$, Bias: $b$, Activation: $s$ \\
+            Output: $s(w^{T}x + b)$ which feeds into the next layer \\
+            \textbf{Gradient Components:} \\
+            $\frac{\partial l}{\partial w} = (\hat y-y)x$, $\frac{\partial l}{\partial x} = (\hat y-y)w$ \\
+            \textbf{2-Layer:} \\
+            $\frac{\partial l}{\partial w^{(1)}_{11}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial w_{11}^{(1)}} = (\hat y-y)w_{11}^{(2)} a_{11}(1-a_{11})x_{1}$ \\
+            $\frac{\partial l}{\partial x_{1}} = \frac{\partial l}{\partial a_{11}}\frac{\partial a_{11}}{\partial x_{1}} + \frac{\partial l}{\partial a_{12}}\frac{\partial a_{12}}{\partial x_{1}}$ \\
+            $ = (\hat y-y)w_{11}^{(2)}a_{11}(1-a_{11})w_{11}^{(1)} + (\hat y-y)w_{21}^{(2)}a_{12}(1-a_{12})w_{12}^{(1)}$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Neural Networks};
+\end{tikzpicture}
+
+% Convolution
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            Let $\mathbf{X}$: $n_h \times n_w$, $\mathbf{Y}$: $m_h \times m_w$ \\
+             \textbf{2D:} use an $k_h \times k_w$ kernel matrix which takes the sum product of the pixels in the image \\
+             \textbf{Padding:} adds $p_h$ rows and $p_w$ columns cushion on the edge of the image to preserve information \\
+             \textbf{Stride:} rows ($s_h$) and columns ($s_w$) per slide \\
+             \textbf{Pooling:} Similar to kernel but uses nonlinear operations (i.e~max pooling), no learnable parameters \\
+             Then, $m_d = [(n_d - k_d + p_d + s_d) / s_d]$ \\
+             \textbf{3D:} Kernel for each channel, sum over channels. Let $c_i$ and $c_o$ be \# of input and output channels \\
+             Learnable Params = $(c_i \times k_h \times k_w + 1) \times c_o$ \\
+             Scalar Mult. Ops. = $c_o \times c_i \times k_h \times k_w \times m_h \times m_w$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Convolution};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% k-Means
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Lloyd's Algo:} Input $x_1, x_2, \dots, x_n, k$ \\
+            1. Select $k$ centers $c_1, c_2, \dots, c_k$ \\
+            2. Assign $x$ to custer $i$ s.t. $\text{argmin}_{i \in 1, \dots, k} ||x - c_i||$ \\
+            3. Update cluster centers $c_i = \sum_{x \in c_i} x / n_{c_i}$ \\
+            Repeat until clusters don't change \\
+            Algo always converges after finitely many iterations
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {$k$-Means Clustering};
+\end{tikzpicture}
+
+% Gaussian Mixture Models
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            $z \sim \text{Multinomial}(\phi) \rightarrow$ Latent Variable \\
+            $x_i \vert z_i = j \sim \mathcal{N}(\mu_j, \Sigma_j) \rightarrow$ Observed Data \\
+            \textbf{EM-Algorithm:} Initialize $\phi$ and $k$ $\mu_j$'s, $\Sigma_j$'s \\
+            E-Step: Set $w^{(i)}_j = P(z^{(i)} = j \vert x^{(i)}; \phi, \mu, \Sigma)$ \\
+            M-Step: Update $\phi, \mu, \Sigma$ based on $w$ \\
+            \textbf{Proof:} Maximize lower bound of log-Likelihood \\
+            $$ \begin{aligned}
+                \mathcal{L}(\theta) & = \sum_{i=1}^{n} \log(\sum_{j=1}^{k} Q_j^{(i)} \frac{P_\theta(x^{(i)}, z^{(i)}=j)}{Q_j^{(i)}}) \\
+                & \geq \sum_{i=1}^{n} \sum_{j=1}^{k} Q_j^{(i)} \log(\frac{P_\theta(x^{(i)}, z^{(i)}=j)}{Q_j^{(i)}})
+            \end{aligned} $$
+            Uses Jensen's Inequality: $E[f(X)] \geq f(E[X])$
+            % $\mathcal{L}(\theta) = \sum_{i=1}^{n} \log(\sum_{j=1}^{k} Q_j^{(i)} \frac{P_\theta(x^{(i)}, z^{(i)}=j)}{Q_j^{(i)}})$ \\
+            % $\quad \geq  \sum_{i=1}^{n} \sum_{j=1}^{k} Q_j^{(i)} \log(\frac{P_\theta(x^{(i)}, z^{(i)}=j)}{Q_j^{(i)}})$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Gaussian Mixture Models};
+\end{tikzpicture}
+
+% Generative Models
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Goal:} Learn a distribution of data from samples \\
+            \textbf{Flow Models:} model $x$ as transformation on latent variable $z$ coming from a simple distribution \\
+            $x = f_{\theta_k}(f_{\theta_{k-1}}(\dots f_{\theta_1}(z)))$ \\
+            $z = f^{-1}_{\theta_1}(f^{-1}_{\theta_2}(\dots f^{-1}_{\theta_k}(x)))$ \\ 
+            So, $f_{\theta_i}$'s must be invertible and differentiable \\ %need to compute inverse of tf and take derivative, so make $f$'s simple \\
+            Then, $P_x(x) = P_z(f^{-1}_\theta(x))|\frac{\partial f^{-1}_\theta(x)}{\partial x}|$ (Jacobian) \\
+            $\max_\theta \sum_i \log(P_z(f^{-1}_\theta(x))) + \log|\frac{\partial f^{-1}_\theta(x)}{\partial x}|$ \\
+            \textbf{GANs:} Train discriminator $\mathcal{D}$ and generator $\mathcal{G}$ simultaneously \\
+            Step 1: Fix generator $\mathcal{G}$, improve discriminator $\mathcal{D}$ \\
+            $\max_{\theta_\mathcal{D}} E_x \log \mathcal{D}(x) + E_z \log(1 - \mathcal{D}(\mathcal{G}(z)))$ \\
+            Step 2: Fix discriminator $\mathcal{D}$, improve generator $\mathcal{G}$ \\
+            $\max_{\theta_\mathcal{G}} E_z \log(\mathcal{D}(\mathcal{G}(z)))$ 
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Generative Models};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% Principal Component Analysis
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Singular Value Decomp:} $X \in \mathbbm{R}^{n \times m} = U \Sigma V^T$ \\
+            % $U \in \mathbbm{R}^{n \times n}$ = eigenvectors of $XX^T$, $U^T = U^{-1}$ \\
+            $V \in \mathbbm{R}^{m \times m}$ = eigenvectors of $X^TX$, $V^T = V^{-1}$ \\
+            $\Sigma^2 \in \mathbbm{R}^{m \times m} = \text{diag}(\lambda_i)$ where $X^TXv_i = \lambda_i v_i$ \\% \sqrt{\text{diag}(\text{eig}(XX^T))}$ \\ 
+            \textbf{PCA:} % Let $X_* = X - \bar{X}$ where $\bar{X}$ is col avg of $X$ \\ To reduce $\dim{(X)}$ by $k$, multiply $X$ by first $k$ columns of $V$ ($XV_k$) \\
+            $v_1 = \text{argmax}_{||v||=1} (||Xv||^2 = \sum_{i=1}^n (v^Tx_i)^2)$ \\ 
+            $X_k = X - \sum_{i=1}^{k-1} Xv_iv_i^T$ \\
+            \textbf{Equivalence:} $r(x_i) = ||x_i - \sum_{j=1}^k x_i^Tv_jv_j||^2_2$ \\
+            $ = (x_i - \sum_{j=1}^k x_i^Tv_jv_j)^T (x_i - \sum_{j=1}^k x_i^Tv_jv_j)$ \\
+            $ = x_i^T x_i - 2 \sum_j x_i^Tv_j x_i^T v_j + \sum_{j}(x_i^T v_i)^2$ \\
+            $ = ||x_i||^2_2 - \sum_{j=1}^k v_j^T x_i x_i^T v_j$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Principal Component Analysis};
+\end{tikzpicture}
+
+% Bayesian Networks
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            Consists to Directed Acyclic Graph (\textbf{DAG}) and set of conditional probability distributions (\textbf{CPD}) \\
+            Est. params at node $\eta$ = $2^{\text{number\_of\_parents}_\eta}$ \\
+            \textbf{Probability:} $P(A|B) = \frac{P(A, B)}{P(A, B) + P(A^c, B)}$ \\
+            \underline{Law of Total Prob.:} $P(A) = \sum_i P(A | B_i) P(B_i)$ \\
+            \underline{Marginalization:} $P(X=a) = \sum_b P(X=a, Y=b)$ \\
+            \textbf{Chow-Liu Algo:} Find max weight spanning tree \\
+            Step 1: compute $I(X_i, X_j)$ for each possible edge where $I(X_i, X_j) = \sum_X \sum_Y P(x, y) \log_2 \frac{P(x, y)}{P(x)P(y)}$\\
+            Step 2: Fill in edge with greatest weight that does not for a cycle until the tree is fully connected \\
+            \textbf{D-Separation:} determining conditional ind. \\
+            Any 3 connected nodes are \textbf{active} if: \\
+            Causal Chain: $X \rightarrow Y \rightarrow Z$ ($Y$ unobserved) \\
+            Common Cause: $X \leftarrow Y \rightarrow Z$ ($Y$ unobserved) \\
+            Common Effect: $X \rightarrow Y \leftarrow Z$ ($Y$ or any child obs) \\
+            A path is active if \underline{all} of its triples are active \\
+            Note: if one triple is inactive, path is inactive \\
+            \textbf{Algo:} For all paths from $A$ to $B$: \\
+            If any path is active: $A \perp B \vert \dots$ is not guaranteed \\
+            If all paths are inactive: $A \perp B \vert \dots$ is guaranteed
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Bayesian Networks};
+\end{tikzpicture}
+
+% Recurrent Neural Networks
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Building Blocks:} State $S$, input $x$, output $o$ \\
+            $a^{(t)} = b + Ws^{(t-1)} + Ux^{(t)}$, $s^{(t)} = \tanh(a^{(t)})$ \\
+            $o^{(t)} = c + Vs^{(t)}$, $\hat{y} = \text{softmax}(o^{(t)})$ \\
+            \textbf{Variants:} encoder/decoder, LSTM 
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Recurrent Neural Networks};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% Support Vector Machines
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Goal:} find hyperplane $w^Tz+b = 0$ that separates classes with greatest margin \\
+            \textbf{Margin:} Let $x_p = \text{proj}_w x$, then $x = x_p + r\frac{w}{||w||}$ \\
+            Margin is $\frac{|w^Tx+b|}{||w||} = \frac{|w^Tx_p +b + r\frac{w^Tw}{||w||}}{||w||} = \frac{|0+r\frac{||w||^2}{||w||}|}{||w||}$ \\
+            \textbf{Problem:} $\max_{w, b, \xi_i} \frac{1}{2}||w||^2 + C \sum_i \xi_i$ \\
+            s.t. $y_i(w^Tx_i + b) + \xi_i \geq 1$ $\forall i$, $\xi_i \geq 0$ $\forall i$ \\
+            where $C$ is hyperparameter, lower $C$ more robust \\
+            \textbf{Optimization:} Solve dual \\
+            $d^* = \max_x \min_y g(x, y)$, $p^* = \min_y \max_x g(x, y)$ \\
+            Consider any $x^*, y^*$. $g(x^*, y^*) \leq \max_x g(x, y^*)$ \\
+            Then, $\min_y g(x^*, y) \leq \min_y \max_x g(x, y)$ for any $x$ \\
+            Therefore, $\max_x \min_y g(x^*, y) \leq \min_y \max_x g(x, y)$ \\
+            Thus, $d^* \leq p^*$\\
+            \textbf{Kernel SVM:} With some conditions, we can a feature map $\phi(x_i)^T \phi(x_j)$ for any kernel $k(x_i, x_j)$.
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Support Vector Machines};
+\end{tikzpicture}
+
+% Reinforcement Learning
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Goal:} find $\pi(S):S \rightarrow A$ to maximize $r(S)$ \\
+            \textbf{Markov Decision Process:} $P(s_{t+1} \vert s_t, a_t)$ \\
+            Assumes transition prob \underline{only} depends on $s_t$ and $a_t$ \\
+            \textbf{Bellman Equation:} find the value of a policy \\
+            $V^\pi(s) = r(s) + \gamma \sum_{s^{'}} P(s^{'} \vert s, \pi(s)) V^\pi(s^{'})$ \\
+            \textbf{Proof:} Let $R(s^{'}_0, s^{'}_1, \dots) = \sum_{t=0}^{\infty} \gamma^t r(s^{'}_t)$ \\
+            $V^\pi(s^{'}_0) = E[R(s_0, s_1, \dots) \vert s_0 = s^{'}_0, \pi]$ \\
+            $= r(s^{'}_0) + \gamma E[R(s_1, s_2, \dots) \vert s_0 = s^{'}_0, \pi]$ \\
+            $= r(s^{'}_0) + \gamma \sum_{s^{'}} P(s_1 = s^{'}_1, \dots \vert s_0 = s^{'}_0, \pi) R(s^{'}_1, \dots)$ \\
+            $= r_0 + \gamma \sum_{s^{'}} P(s^{'}_1 \vert s^{'}_0, \pi) P(s^{'}_2, \dots \vert s^{'}_0, s^{'}_1, \pi) R(s^{'}_1, \dots)$ \\
+            $= r_0 + \gamma \sum_{s^{'}} P(s^{'}_1 \vert s^{'}_0, \pi) E[R(s_1, s_2, \dots) \vert s^{'}_1, \pi]$ \\
+            $= r(s^{'}_0) + \gamma \sum_{s^{'}} P(s_1 = s^{'}_1 \vert s_0 = s^{'}_0, \pi) V^\pi(s^{'}_1)$ \\
+            Note: $\sum_{t=0}^{\infty} \gamma^t r = r (1 - \gamma)^{-1}$ (PV Perpetuity) \\
+            \textbf{Optimal Policy:} Start with $V_0(s)=0$. Then, \\
+            $V_{i+1}(s) = r(s) + \gamma \max_a \sum_{s^{'}} P(s^{'} \vert s, a) V_i(s^{'})$ \\
+            \textbf{Q-Function:} Action value function \\
+            $Q(s,a) = r(s) + \gamma \sum_{s^{'}} P(s^{'} \vert s,a) V^\star(s^{'})$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Reinforcement Learning};
+\end{tikzpicture}
+
+\vfil\null
+\columnbreak
+
+% Learning Theory
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Bayes Optimal Classifier:} minimizes risk $R$\\
+            $h^*(x) = \arg \max_y P(y \vert x)$, $R(h) = E[h(x) \neq y]$ \\
+            \textbf{Proof:} $R(h) = E[E[\mathbbm{1}(h(x) = y) \vert X = x]]$ \\
+            $ = E[\mathbbm{1}(h(x) = 0)P(1 \vert x) + \mathbbm{1}(h(x) = 1)P(0 \vert x)]$ \\
+            \textbf{Error Bound:} $R(\hat{h}) - R(h_*) = R(\hat{h}) - R(h_{\text{opt}}) + R(h_{\text{opt}}) - R(h_*)$ (i.e., est. err. - approx. err.) \\
+            If $\mathcal{H} \subseteq \mathcal{H^{'}}$ app. err. is no worse, est. err. is larger \\
+            \underline{Est. Error Bound:} For finite $\mathcal{H}$, w/ prob. $\geq 1-\delta$ \\
+            $R(\hat{h}) - R(h_{\text{opt}}) \leq 2 \sqrt{\frac{1}{2n}\log(\frac{2|\mathcal{H}|}{\delta})}$ \\
+            %  $P(|R(h) - \bar{R}(h)| > \epsilon) \leq 2|\mathcal{H}|\exp(-2n\epsilon^2)$ \\
+            \textbf{Proof:} $\mathcal{G} = \{\forall h \in \mathcal{H}: |R(h) - \bar{R}(h)|\leq \epsilon(n, \delta)\}$\\
+            $\epsilon(n, \delta) = \sqrt{\frac{1}{2n}\log(\frac{2|\mathcal{H}|}{\delta})}$ \\
+             $P(\mathcal{G}^c) \geq 2|\mathcal{H}| \exp(-2n \frac{1}{2n} \log(\frac{2|\mathcal{H}|}{\delta})) = \delta$ \\
+             So, $P(\mathcal{G}) = 1 - \delta$. Assuming $\mathcal{G}$ is true: \\
+             $R(\hat{h}) \leq \bar{R}(\hat{h}) + \epsilon(n, \delta) \leq \bar{R}(h_\text{opt}) + \epsilon(n, \delta)$ \\
+             $\leq R(h_\text{opt}) + 2\epsilon(n, \delta)$ \\
+            \textbf{VC-dim:} $d_\mathcal{H}$, size of largest set shattered by $\mathcal{H}$ \\
+            \underline{Shattering:} $\mathcal{H}$ shatters $\{x_1, \dots, x_k\}$ if it can realize any labeling on lin. ind. set $\{x_1, \dots, x_k\}$ \\
+            For linear classifiers in $d$-dim, $d_\mathcal{H} = d + 1$
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Learning Theory};
+\end{tikzpicture}
+
+% Large Language Models
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Word Embeddings:} \\
+             $\mathcal{L}(\theta) = \prod_{t=1}^T \prod_{-a \leq j \leq a} P(w_{t+j} \vert w_t, \theta)$ \\
+             $P(w^{'} \vert w, \theta) = \frac{\exp(\theta_{w^{'},o}^T \theta_{w, c}) (\rightarrow o \text{ occurrence})}{\sum_V \exp(\theta_{v,o}^T \theta_{w, c}) (\rightarrow c \text{ context})}$ \\
+             \textbf{Attention:} functional combination of all encoder states fed into all decoder states instead of single encoder output fed into inital decoder state. Similar to residual connections. \\
+             \textbf{Transformers:} Self-attention, learns parameters for \textit{queries, keys, values}.
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Large Language Models};
+\end{tikzpicture}
+
+% Fairness
+\begin{tikzpicture}
+    \node [mybox] (box){%
+        \begin{minipage}{0.3\textwidth}
+            \textbf{Bias:} inherited from bias in training data (e.g., spurious correlation, sample size disparity, proxies) \\
+            Distributionally Robust Optimization (DRO): minimize empirical worst-group risk \\
+            \textbf{Privacy:} differentiatial privacy adds some noise so removing single datapoint doesn't change output \\
+            \textbf{Adversarial Robustness:} training on adversarial data improves preformance on adversarial and clean test data
+        \end{minipage}
+    };
+\node[fancytitle, right=10pt] at (box.north west) {Fairness};
+\end{tikzpicture}
+
+% Professor said PDFs will be provided
+% % Probability Distributions
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%             \textbf{Binomial:} $\binom{x}{n} \theta^x (1-\theta)^{n-x}$ \\
+%             \textbf{Normal:} $(2\pi\sigma^{2})^{-\frac{1}{2}} 
+%             \exp\left\{-\frac{1}{2\sigma^{2}}\left(x-\mu\right)^{\!2}\,\right\}$ \\
+%             \textbf{Beta:} $\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha,\beta)}x^{\alpha-1}(1-x)^{\beta-1}$ \\
+%             \textbf{Gamma:} $\frac{r^{s}}{\Gamma(s)}x^{s-1} e^{-r x}$ \\
+%             \textbf{Exponential:} $\lambda e^{-\lambda x}$ \\
+%             \textbf{Multinomial:} $\frac{n!}{x_{1}! \dots x_{k}!}p_{1}^{x_{1}} \dots p_{k}^{x_{k}}$
+%         \end{minipage}
+%     };
+% % Probability Distributions Header
+% \node[fancytitle, right=10pt] at (box.north west) {Probability Distributions};
+% \end{tikzpicture}
+
+% MIDTERM CONCEPTS
+
+% % Overview
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%             $\mathcal{X} \rightarrow \text{input space}$ \\
+%             $\mathcal{Y} \rightarrow \text{output space}$ \\
+%             $\mathcal{H} \rightarrow \text{hypothesis class}$\\
+%             \textbf{Goal:} \\
+%             model $h \in \mathcal{H}$ that best approximates $f:\mathcal{X} \rightarrow \mathcal{Y}$
+%         \end{minipage}
+%     };
+%     \node[fancytitle, right=10pt] at (box.north west) {Overview};
+%     \end{tikzpicture}
+    
+
+    % % Empirical Risk Minimization
+    % \begin{tikzpicture}
+    %     \node [mybox] (box){%
+    %         \begin{minipage}{0.3\textwidth}
+    %              $\hat{f} = \arg \underset{h \in \mathcal{H}}{\min} \frac{1}{n} \sum_{i=1}^{n} \ell (h(x^{(i)}), y^{(i)})$
+    %         \end{minipage}
+    %     };
+    % \node[fancytitle, right=10pt] at (box.north west) {Empirical Risk Minimization};
+    % \end{tikzpicture}
+
+% % Activation Functions
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%             $\sigma(x) = \frac{e^{x}}{1+e^{x}}$ \\
+%             $\text{ReLU}(x) = \max\{0, x\}$ \\
+%             $\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}} = 2\sigma(2x) - 1$ \\
+%             $\frac{d}{dx} \tanh(x) = 1 - \tanh^{2}(x)$ 
+%         \end{minipage}
+%     };
+% % Activation Functions Header
+% \node[fancytitle, right=10pt] at (box.north west) {Activation Functions};
+% \end{tikzpicture}
+
+% % k-Nearest Neighbors
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%              $\hat{y} = \sum_{i=1}^{k} y^{(i)}$ for $k$ closest points \\
+%              \textbf{Distances:} \\
+%              Hamming: $d_{H}(x^{(i), x^{(j)}}) = \sum_{a=1}^{d} \mathbbm{1}(x^{(i)}_{a} \neq x^{(j)}_{a}) $ \\
+%              Euclidean: $d(x^{(i)}, x^{(j)}) = \left(\sum_{a=1}^{d} (x^{(i)}_{a} - x^{(j)}_{a})^{2} \right)^{-\frac{1}{2}}$ \\
+%              Manhattan: $d(x^{(i)}, x^{(j)}) = \sum_{a=1}^{d} |x^{(i)}_{a} - x^{(j)}_{a})^{2}|$
+%         \end{minipage}
+%     };
+% % k-Nearest Neighbors Header
+% \node[fancytitle, right=10pt] at (box.north west) {$k$ Nearest Neighbors};
+% \end{tikzpicture}
+
+% % Decision Trees
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%              \textbf{Algorithm:} \\
+%              \textit{MakeSubtree}: \\
+%              Determine Candidate Splits \\
+%              if stopping criteria: make leaf \\
+%              else: \textit{MakeSubtree} with best split \\
+%              return subtree rooted at N
+%         \end{minipage}
+%     };
+% % Decision Trees Header
+% \node[fancytitle, right=10pt] at (box.north west) {Decision Trees};
+% \end{tikzpicture}
+
+% % Perceptrons
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%              \begin{equation*}
+%                 \hat y(x) = 
+%                 \begin{cases}
+%                     1, & w^{T}x \geq 0 \\
+%                     0, & \text{otherwise}
+%                 \end{cases}
+%              \end{equation*} \\
+%         \textbf{Algorithm:} \\
+%         for index $i$: \\
+%         if $y^{(i)}w^{T}x^{(i)} < 1$ (i.e prediction is wrong): \\
+%         then $w_{t+1} = w_{t} + y^{(i)}x^{(i)}$ \\
+%         else $w_{t+1} = w_{t}$ \\
+%         \textbf{Mistake Bound:} $(2 + D(S)^{2})\gamma(S)^{-2}$ \\
+%         where $D(S)$ is the max diameter and $\gamma(S)$ is the largest margin we can have with dataset $S$
+%         \end{minipage}
+%     };
+% \node[fancytitle, right=10pt] at (box.north west) {Perceptrons};
+% \end{tikzpicture}
+
+% % L2 Regularization
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%             \textbf{Effect on GD:} \\
+%             Loss: $\hat |_{R}(\theta) = \hat L(\theta) + \frac{\lambda}{2}||\theta||_{2}^{2}$ \\
+%             Gradient: $\nabla \hat L_{R}(\theta) = \nabla \hat L(\theta) + \lambda \theta$ \\
+%             GD Update: $\theta_{t+1} = (1 - \nu\lambda)\theta_{t} - \nu \nabla \hat L(\theta_{t})$ \\
+%             Effect: decays weights by $(1-\nu\lambda)$ \\
+%             \textbf{Effect on Optimal Solution:} \\
+%             $\theta_{R}^{*} \approx (H + \lambda I)^{-1}H\theta^{*} = Q(\Lambda + \lambda I)^{-1}\Lambda Q^{T} \theta^{*}$ \\
+%             Effect: shrinks along eigenvectors of $H$
+%         \end{minipage}
+%     };
+% % L2 Regularization Header
+% \node[fancytitle, right=10pt] at (box.north west) {L2 Regularization};
+% \end{tikzpicture}
+
+\end{multicols*}
+\end{document}
+
+% % New Section 
+% \begin{tikzpicture}
+%     \node [mybox] (box){%
+%         \begin{minipage}{0.3\textwidth}
+%              .
+%         \end{minipage}
+%     };
+% % New Header
+% \node[fancytitle, right=10pt] at (box.north west) {New Header};
+% \end{tikzpicture}
